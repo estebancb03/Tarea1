@@ -1,0 +1,148 @@
+#ifndef QUEUE_H
+#define QUEUE_H
+using namespace std;
+template < class T >
+
+class Queue {
+    int first;
+    int last;
+    int size;
+    T *array;
+    public:
+        void create(int s);
+        void destroy();
+        void clear();
+        void print();
+        bool add(T element);
+        bool empty();
+        bool full();
+        int quantity();
+        T pop();
+        T top();
+};
+
+/*
+    EFECTO: crea e inicializa la cola circular
+    REQUIERE: cola no creada o destruida
+    MODIFICA: cola
+*/
+template < typename T >
+void Queue< T > :: create(int s) {
+    array = new T[s];
+    size = size;
+    first = -1;
+    last = -1; 
+}
+
+/*
+    EFECTO: elimina la estructura de datos
+    REQUIERE: cola creada
+    MODIFICA: cola
+*/
+template < typename T >
+void Queue< T > :: destroy() {
+    delete array;
+}
+
+/*
+    EFECTO:
+    REQUIERE:
+    MODIFICA:
+*/
+template < typename T >
+void Queue< T > :: clear() {
+
+}
+
+/*
+    EFECTO: introduce un elemento al final de la cola
+    REQUIERE: cola creada
+    MODIFICA: cola
+*/
+template < typename T >
+bool Queue< T > :: add(T element) {
+    if(!this -> full()) {
+        if(this -> empty()) {
+            first = 0;
+        }
+        if(last == size - 1) {
+            last = 0;
+        }
+        else {
+            last++;
+        }
+        array[last] = element;
+        return true;
+    }
+    else 
+        return false;
+}
+
+/*
+    EFECTO: devuelve un verdadero si la cola está vacía y un falso si no
+    REQUIERE: cola creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+bool Queue< T > :: empty() {
+    return last == -1 ? true : false;
+}
+
+/*
+    EFECTO: devuelve la cantidad de elementos precentes en la cola
+    REQUIERE: cola creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+int Queue< T > :: quantity() {
+    int result = 0;
+    if(!this -> empty()) {
+        if(first <= last)
+            result = last - first + 1;
+        else
+            result = size - first + last + 1;
+    }
+    return result;
+}
+
+/*
+    EFECTO: devuelve un verdadero si la cola está llena y un falso si no
+    REQUIERE: cola creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+bool Queue< T > :: full() {
+    return this -> quantity() == size ? true : false;
+}
+
+/*
+    EFECTO:
+    REQUIERE:
+    MODIFICA:
+*/
+template < typename T >
+T Queue< T > :: pop() {
+
+}
+
+/*
+    EFECTO: devuelve el primer elemento de la cola
+    REQUIERE: cola creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+T Queue< T > :: top() {
+    return array[first];
+}
+
+/*
+    EFECTO: imprime los elementos de la cola
+    REQUIERE: cola creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+void Queue< T > :: print() {
+    cout << array[0];
+}
+
+#endif
