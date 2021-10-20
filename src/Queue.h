@@ -130,7 +130,7 @@ T Queue< T > :: pop() {
 */
 template < typename T >
 T Queue< T > :: top() {
-    return array[first];
+        return array[first];
 }
 
 /*

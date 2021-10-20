@@ -109,7 +109,8 @@ void Menus< T > :: queueMenu() {
 			}	break;
 			case 7: {
 				system("cls");
-				cout << "Elemento del frente: " << cola -> top() << endl << endl;
+				cout << "Elemento del frente: " << cola -> top();
+				cout << endl << endl;
 				system("pause");
 			}	break;
 			case 8: {
