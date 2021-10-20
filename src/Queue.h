@@ -10,9 +10,9 @@ class Queue {
     T array[10];
     public:
         void create();
-        void destroy();
-        void clear();
-        void print();
+        void destroy(); //Falta por hacer
+        void clear(); //Falta por hacer
+        void print(); //Falta por hacer
         bool add(T element);
         bool empty();
         bool full();
@@ -30,6 +30,16 @@ template < typename T >
 void Queue< T > :: create() {
     first = -1;
     last = -1; 
+    this -> add("h");
+    this -> add("o");
+    this -> add("l");
+    this -> add("a");
+    this -> add("_");
+    this -> add("m");
+    this -> add("u");
+    this -> add("n");
+    this -> add("d");
+    this -> add("o");
 }
 
 /*
@@ -126,7 +136,11 @@ T Queue< T > :: pop() {
             this -> create();
         }
         else {
-            ++first;
+            array[first] = "";
+            if(first == size - 1)
+                first = 0;
+            else
+                ++first;
         }
         return temp;
     }
@@ -150,10 +164,16 @@ T Queue< T > :: top() {
 template < typename T >
 void Queue< T > :: print() {
     cout << "Cola: ";
-    for(int i = 0; i < size; ++i) {
-        cout << array[i];
+    for(int i = first; i < size; ++i) {
+        cout << "#" << i << ": " << array[i];
         if(i < size - 1)
             cout << " -> ";
+    }
+    if(first != 0) {
+        for(int i = 0; i < first; ++i) {
+            cout << " #" << i << ": " << array[i];
+            cout << " -> ";
+        }
     }
 }
 
