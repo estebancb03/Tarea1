@@ -10,9 +10,9 @@ class Queue {
     T *array;
     public:
         void create();
-        void destroy(); //Falta por hacer
-        void clear(); //Falta por hacer
-        void print(); //Falta por hacer
+        void destroy(); 
+        void clear(); 
+        void print(); 
         bool add(T element);
         bool empty();
         bool full();
@@ -56,10 +56,10 @@ void Queue< T > :: clear() {
     if(!this -> empty()) {
         for(int i = 0; i < size; ++i) {
             array[i] = 0;
-        }
-        first = -1;
-        last = -1; 
+        } 
     }
+    first = -1;
+    last = -1;
 }
 
 /*
@@ -132,16 +132,13 @@ template < typename T >
 T Queue< T > :: pop() {
     if(!this -> empty()) {
         T temp = array[first];
-        if(this -> quantity() == 1) {
+        if(this -> quantity() == 1) 
             this -> create();
-        }
-        else {
-            array[first] = 0;
-            if(first == size - 1)
-                first = 0;
-            else
-                ++first;
-        }
+        array[first] = 0;
+        if(first == size - 1)
+            first = 0;
+        else
+            ++first;
         return temp;
     }
 }

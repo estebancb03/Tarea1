@@ -65,7 +65,6 @@ void Menus< T > :: queueMenu() {
 			case 1: {
 				system("cls");
 				cola = new Queue< T >();
-				cout << endl;
 				cola -> create();
 				cout << "Cola creada correctamente" << endl << endl;
 				system("pause");
@@ -116,7 +115,7 @@ void Menus< T > :: queueMenu() {
 			case 8: {
 				system("cls");
 				cola -> print();
-				cout << endl << endl;
+				cout << endl;
 				system("pause");
 			}	break;
 			case 9: {
