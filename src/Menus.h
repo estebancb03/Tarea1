@@ -2,7 +2,7 @@
 #define MENUS_H
 #include "Pipe.h"
 #include "Queue.h"
-#include "TreeA.h"
+#include "TreeA.h" //Este include se cambia depende de cual implementación de árbol se quiera usar
 using namespace std;
 template <class T>
 
@@ -64,11 +64,9 @@ void Menus< T > :: queueMenu() {
 		switch(option) {
 			case 1: {
 				system("cls");
-				int size;
 				cola = new Queue< T >();
-				cout << "Longitud del arreglo: "; cin >> size;
 				cout << endl;
-				cola -> create(size);
+				cola -> create();
 				cout << "Cola creada correctamente" << endl << endl;
 				system("pause");
 			}	break;
@@ -117,7 +115,7 @@ void Menus< T > :: queueMenu() {
 			case 8: {
 				system("cls");
 				cola -> print();
-				cout << endl;
+				cout << endl << endl;
 				system("pause");
 			}	break;
 			case 9: {

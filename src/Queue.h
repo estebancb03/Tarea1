@@ -6,10 +6,10 @@ template < class T >
 class Queue {
     int first;
     int last;
-    int size;
-    T *array;
+    int size = 10;
+    T array[10];
     public:
-        void create(int s);
+        void create();
         void destroy();
         void clear();
         void print();
@@ -27,9 +27,7 @@ class Queue {
     MODIFICA: cola
 */
 template < typename T >
-void Queue< T > :: create(int s) {
-    array = new T[s];
-    size = size;
+void Queue< T > :: create() {
     first = -1;
     last = -1; 
 }
@@ -41,7 +39,7 @@ void Queue< T > :: create(int s) {
 */
 template < typename T >
 void Queue< T > :: destroy() {
-    delete array;
+    //delete array;
 }
 
 /*
@@ -142,7 +140,12 @@ T Queue< T > :: top() {
 */
 template < typename T >
 void Queue< T > :: print() {
-    cout << array[0];
+    cout << "Cola: ";
+    for(int i = 0; i < size; ++i) {
+        cout << array[i];
+        if(i < size - 1)
+            cout << " -> ";
+    }
 }
 
 #endif
