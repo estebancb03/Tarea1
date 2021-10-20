@@ -102,14 +102,22 @@ void Menus< T > :: queueMenu() {
 			}	break;
 			case 6: {
 				system("cls");
-				cout << "Elemento sacado correctamente" << endl;
-				cout << "Elemento sacado: " << cola -> pop() << endl << endl;
+				T element = cola -> pop();
+				if(element != -1) {
+					cout << "Elemento sacado correctamente" << endl;
+					cout << "Elemento sacado: " << element << endl << endl;
+				}
+				else
+					cout << "Error: cola vacia, no hay elementos que sacar " << endl << endl;
 				system("pause");
 			}	break;
 			case 7: {
 				system("cls");
-				cout << "Elemento del frente: " << cola -> top();
-				cout << endl << endl;
+				T element = cola -> top();
+				if(element != -1)
+					cout << "Elemento del frente: " << element << endl << endl;
+				else
+					cout << "Error: cola vacia, no existe elemento en el frente" << endl << endl;
 				system("pause");
 			}	break;
 			case 8: {

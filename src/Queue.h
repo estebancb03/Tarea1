@@ -141,6 +141,8 @@ T Queue< T > :: pop() {
             ++first;
         return temp;
     }
+    else
+        return -1;
 }
 
 /*
@@ -150,7 +152,10 @@ T Queue< T > :: pop() {
 */
 template < typename T >
 T Queue< T > :: top() {
+    if(!this -> empty())
         return array[first];
+    else
+        return -1;
 }
 
 /*
