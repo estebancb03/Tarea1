@@ -7,7 +7,7 @@ class Queue {
     int first;
     int last;
     int size = 10;
-    T array[10];
+    T *array;
     public:
         void create();
         void destroy(); //Falta por hacer
@@ -28,18 +28,12 @@ class Queue {
 */
 template < typename T >
 void Queue< T > :: create() {
+    array = new T[size];
     first = -1;
     last = -1; 
-    this -> add("h");
-    this -> add("o");
-    this -> add("l");
-    this -> add("a");
-    this -> add("_");
-    this -> add("m");
-    this -> add("u");
-    this -> add("n");
-    this -> add("d");
-    this -> add("o");
+    for(int i = 0; i < size; ++i) {
+        array[i] = 0;
+    }
 }
 
 /*
@@ -49,17 +43,23 @@ void Queue< T > :: create() {
 */
 template < typename T >
 void Queue< T > :: destroy() {
-    //delete array;
+    delete []array;
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: elimina todos los elementos presentes en la cola
+    REQUIERE: cola creada
+    MODIFICA: cola
 */
 template < typename T >
 void Queue< T > :: clear() {
-
+    if(!this -> empty()) {
+        for(int i = 0; i < size; ++i) {
+            array[i] = 0;
+        }
+        first = -1;
+        last = -1; 
+    }
 }
 
 /*
@@ -136,7 +136,7 @@ T Queue< T > :: pop() {
             this -> create();
         }
         else {
-            array[first] = "";
+            array[first] = 0;
             if(first == size - 1)
                 first = 0;
             else
@@ -163,16 +163,12 @@ T Queue< T > :: top() {
 */
 template < typename T >
 void Queue< T > :: print() {
-    cout << "Cola: ";
     for(int i = first; i < size; ++i) {
-        cout << "#" << i << ": " << array[i];
-        if(i < size - 1)
-            cout << " -> ";
+        cout << "array[" << i << "]: " << array[i] << endl;
     }
     if(first != 0) {
         for(int i = 0; i < first; ++i) {
-            cout << " #" << i << ": " << array[i];
-            cout << " -> ";
+            cout << "array[" << i << "]: " << array[i] << endl;
         }
     }
 }
