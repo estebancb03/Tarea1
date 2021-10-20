@@ -46,7 +46,7 @@ void Pipe< T > :: destroy() {
 template < typename T >
 void Pipe< T > :: push(T element) {
     Node< T > *temp = new Node< T >(element);
-    if(empty()) {
+    if(this -> empty()) {
         head = temp;
     }
     else {
@@ -62,10 +62,10 @@ void Pipe< T > :: push(T element) {
 */
 template <typename T>
 void Pipe< T > :: clear() {
-    if(!empty()) {
+    if(!this -> empty()) {
         Node< T > *temp = head;
-        while(head != nullptr) {
-            head = temp -> getNext();
+        while(head) {
+            head = head -> getNext();
             temp = nullptr;
             delete temp;
         }
@@ -103,7 +103,8 @@ T Pipe< T > :: pop() {
 */
 template < typename T >
 T Pipe< T > :: top() {
-    return head -> getObject();
+    if(!this -> empty())
+        return head -> getObject();
 }
 
 /*
@@ -133,7 +134,7 @@ void Pipe< T > :: print() {
         }
     }
     else
-        cout << "Pila vacia";
+        cout << "Pila vacia" << endl;
 }
 
 #endif
