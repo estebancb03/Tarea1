@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-	Menus<string> *menu = new Menus<string>();
+	Menus<int> *menu = new Menus<int>();
 	menu -> principalMenu();
 	return 0;
 }

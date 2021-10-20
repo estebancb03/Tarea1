@@ -114,13 +114,22 @@ bool Queue< T > :: full() {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve el primer elemento y a la vez lo elimina de la cola
+    REQUIERE: cola creada
+    MODIFICA: cola
 */
 template < typename T >
 T Queue< T > :: pop() {
-
+    if(!this -> empty()) {
+        T temp = array[first];
+        if(this -> quantity() == 1) {
+            this -> create();
+        }
+        else {
+            ++first;
+        }
+        return temp;
+    }
 }
 
 /*
