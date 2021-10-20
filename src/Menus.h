@@ -182,13 +182,22 @@ void Menus< T > :: pipeMenu() {
 			}	break;
 			case 6: {
 				system("cls");
-				cout << "Elemento sacado correctamente" << endl;
-				cout << "Elemento sacado: " << pila -> pop() << endl << endl;
+				T element = pila -> pop();
+				if(element != -1) {
+					cout << "Elemento sacado correctamente" << endl;
+					cout << "Elemento sacado: " << element << endl << endl;
+				}
+				else
+					cout << "Error: pila vacia, no hay elementos que sacar " << endl << endl;
 				system("pause");
 			}	break;
 			case 7: {
 				system("cls");
-				cout << "Elemento del frente: " << pila -> top() << endl << endl;
+				T element = pila -> top();
+				if(element != -1)
+					cout << "Elemento del frente: " << element << endl << endl;
+				else
+					cout << "Error: pila vacia, no existe elemento en el frente" << endl << endl;
 				system("pause");
 			}	break;
 			case 8: {

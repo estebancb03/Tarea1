@@ -89,11 +89,15 @@ bool Pipe< T > :: empty() {
 */
 template < typename T >
 T Pipe< T > :: pop() {
-    Node< T > *temp = head;
-    T element = temp -> getObject();
-    head = head -> getNext();
-    delete temp;
-    return element;
+    if(!this -> empty()) {
+        Node< T > *temp = head;
+        T element = temp -> getObject();
+        head = head -> getNext();
+        delete temp;
+        return element;
+    }
+    else 
+        return -1;
 }
 
 /*
@@ -105,6 +109,8 @@ template < typename T >
 T Pipe< T > :: top() {
     if(!this -> empty())
         return head -> getObject();
+    else
+        return -1;
 }
 
 /*
