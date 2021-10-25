@@ -55,7 +55,7 @@ void Menus< T > :: principalMenu() {
 /*
 	EFECTO: maneja el uso de los métodos de la clase Queue
 	REQUIERE: no tiene requerimientos
-	MODIFICACIONES: varias modificaciones de acuerdo a las opciones elegidas
+	MODIFICACIONES: varias modificaciones sobre la cola de acuerdo a las opciones elegidas
 */
 template < typename T >
 void Menus< T > :: queueMenu() {
@@ -147,6 +147,11 @@ void Menus< T > :: queueMenu() {
 	}
 }
 
+/*
+	EFECTO: maneja el uso de los métodos de la clase Pipe
+	REQUIERE: no tiene requerimientos
+	MODIFICACIONES: varias modificaciones sobre la pila de acuerdo a las opciones elegidas
+*/
 template < typename T >
 void Menus< T > :: pipeMenu() {
 	bool enabled = true;
