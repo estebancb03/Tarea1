@@ -107,7 +107,7 @@ void Tree< T > :: modifyTag(NodeTreeD< T > *node, T newTag) {
 */
 template < typename T >
 NodeTreeD< T > Tree< T > :: *getRoot() {
-    
+    return root;
 }
 
 /*
@@ -127,7 +127,7 @@ NodeTreeD< T > Tree< T > :: *father(NodeTreeD< T > *node) {
 */
 template < typename T >
 NodeTreeD< T > Tree< T > :: *leftmostSon(NodeTreeD< T > *node) {
-
+    return node -> getLeftmostSon();
 }
 
 /*
@@ -137,7 +137,7 @@ NodeTreeD< T > Tree< T > :: *leftmostSon(NodeTreeD< T > *node) {
 */
 template < typename T >
 NodeTreeD< T > Tree< T > :: *rightBrother(NodeTreeD< T > *node) {
-
+    return node -> getRightBrother();
 }
 
 /*
