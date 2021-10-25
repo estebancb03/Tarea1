@@ -295,6 +295,10 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 5: {
 				system("cls");
+				T tag;
+				cout << "Etiqueta: "; cin >> tag;
+				arbol -> setRoot(tag);
+				cout << "Nodo raiz establecido correctamente" << endl << endl;
 				system("pause");
 			}	break;
 			case 6: {

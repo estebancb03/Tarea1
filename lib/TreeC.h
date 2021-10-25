@@ -60,7 +60,7 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-
+    root = new Node< T >(tag);
 }
 
 /*
