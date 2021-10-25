@@ -127,14 +127,14 @@ void Pipe< T > :: print() {
             stringstream sstream; 
             sstream << temp -> getObject();
             string element = sstream.str();
-            string espacios;
-            int cantidad = (26 - element.length()) / 2;
-            for (int i = 0; i < cantidad - 1; i++) 
-                espacios += " ";
-            cout << "|" << espacios;
+            string spaces;
+            int number = (26 - element.length()) / 2;
+            for (int i = 0; i < number - 1; i++) 
+                spaces += " ";
+            cout << "|" << spaces;
             if(element.length() % 2 != 0)
                 cout << " ";
-            cout << element << espacios << " |";
+            cout << element << spaces << " |";
             cout << endl << "---------------------------" << endl;
             temp = temp -> getNext();
         }
