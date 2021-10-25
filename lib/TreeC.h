@@ -9,8 +9,6 @@ class Tree {
         void create();
         void destroy();
         void clear();
-        bool search(T tag);
-        NodeTreeC< T > search2(T tag);
         void setRoot(T tag);
         void addSon(NodeTreeC< T > father, T sonTag);
         void deleteLeaf(NodeTreeC< T > node);
@@ -20,9 +18,11 @@ class Tree {
         T leftmostSon(NodeTreeC< T > node);
         T rightBrother(NodeTreeC< T > node);
         T tag(NodeTreeC< T > node);
+        NodeTreeC< T > search2(T tag);
         int numNodes();
         int numSons(NodeTreeC< T > node);
         bool empty();
+        bool search(T tag);
 };
 
 /*
@@ -175,6 +175,25 @@ T Tree< T > :: tag(NodeTreeC< T > node) {
     return node -> getObject();
 }
 
+/*
+    EFECTO: devuelve un verdadero si el nodo existe, si no devuelve falso
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+bool Tree< T > :: search(T tag) {
+    bool result = false;
+    return result;
+}
 
+/*
+    EFECTO: devuelve el nodo que contiene deteerminada etiqueta
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+NodeTreeC< T > Tree< T > :: search2(T tag) {
+
+}
 
 #endif
