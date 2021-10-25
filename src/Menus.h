@@ -18,6 +18,11 @@ class Menus {
 		void treeMenu();
 };
 
+/*
+	EFECTO: maneja el desplazamiento entre los otros menus
+	REQUIERE: no tiene requerimientos, solo se le invoca en el Main.cpp
+	MODIFICA: no hace modificaciones
+*/
 template < typename T >
 void Menus< T > :: principalMenu() {
 	bool enabled = true;
