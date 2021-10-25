@@ -96,7 +96,7 @@ void Tree< T > :: deleteLeaf(NodeTreeD< T > *node) {
 */
 template < typename T >
 void Tree< T > :: modifyTag(NodeTreeD< T > *node, T newTag) {
-    
+    node -> setObject(newTag);
 }
 
 /*
