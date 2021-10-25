@@ -1,6 +1,5 @@
 #include <iostream>
-#include "Menus.h"
-using namespace std;
+#include "../lib/Menus.h"
 
 int main() {
 	Menus< int > *menu = new Menus< int >();
