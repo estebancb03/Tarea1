@@ -86,6 +86,7 @@ void Tree< T > :: addSon(NodeTreeD< T > *father, T sonTag) {
 */
 template < typename T >
 void Tree< T > :: deleteLeaf(NodeTreeD< T > *node) {
+    delete node;
     nodesNumber--;
 }
 
