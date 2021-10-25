@@ -9,18 +9,20 @@ class Tree {
         void create();
         void destroy();
         void clear();
+        bool search(T tag);
+        NodeTreeC< T > search(T tag);
         void setRoot(T tag);
-        void addSon(T tag, T sonTag);
-        void deleteLeaf(T tag);
-        void modifyTag(T oldTag, T newTag);
+        void addSon(NodeTreeC< T > father, T sonTag);
+        void deleteLeaf(NodeTreeC< T > node);
+        void modifyTag(NodeTreeC< T > node, T newTag);
         T getRoot();
-        T father(T tag);
-        T leftmostSon(T tag);
-        T rightBrother(T tag);
+        T father(NodeTreeC< T > node);
+        T leftmostSon(NodeTreeC< T > node);
+        T rightBrother(NodeTreeC< T > node);
+        T tag(NodeTreeC< T > node);
         int numNodes();
-        int numSons(T tag);
+        int numSons(NodeTreeC< T > node);
         bool empty();
-        //Falta Etiqutea
 };
 
 /*
@@ -69,7 +71,7 @@ void Tree< T > :: setRoot(T tag) {
     MODIFICA: 
 */
 template < typename T >
-void Tree< T > :: addSon(T tag, T sonTag) {
+void Tree< T > :: addSon(NodeTreeC< T > father, T sonTag) {
 
 }
 
@@ -79,7 +81,7 @@ void Tree< T > :: addSon(T tag, T sonTag) {
     MODIFICA: 
 */
 template < typename T >
-void Tree< T > :: deleteLeaf(T tag) {
+void Tree< T > :: deleteLeaf(NodeTreeC< T > node) {
 
 }
 
@@ -89,7 +91,7 @@ void Tree< T > :: deleteLeaf(T tag) {
     MODIFICA: 
 */
 template < typename T >
-void Tree< T > :: modifyTag(T oldTag, T newTag) {
+void Tree< T > :: modifyTag(NodeTreeC< T > node, T newTag) {
 
 }
 
@@ -109,7 +111,7 @@ T Tree< T > :: getRoot() {
     MODIFICA: 
 */
 template < typename T >
-T Tree< T > :: father(T tag) {
+T Tree< T > :: father(NodeTreeC< T > node) {
 
 }
 
@@ -119,7 +121,7 @@ T Tree< T > :: father(T tag) {
     MODIFICA: 
 */
 template < typename T >
-T Tree< T > :: leftmostSon(T tag) {
+T Tree< T > :: leftmostSon(NodeTreeC< T > node) {
 
 }
 
@@ -129,7 +131,7 @@ T Tree< T > :: leftmostSon(T tag) {
     MODIFICA: 
 */
 template < typename T >
-T Tree< T > :: rightBrother(T tag) {
+T Tree< T > :: rightBrother(NodeTreeC< T > node) {
 
 }
 
@@ -149,7 +151,7 @@ int Tree< T > :: numNodes() {
     MODIFICA: 
 */
 template < typename T >
-int Tree< T > :: numSons(T tag) {
+int Tree< T > :: numSons(NodeTreeC< T > node) {
 
 }
 
