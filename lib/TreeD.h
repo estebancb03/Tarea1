@@ -158,7 +158,7 @@ int Tree< T > :: numNodes() {
 template < typename T >
 int Tree< T > :: numSons(NodeTreeD< T > *node) {
     int result = 0;
-    NodeTreeD< T > temp = node -> getLeftmostSon();
+    NodeTreeD< T > *temp = node -> getLeftmostSon();
     while(temp) {
         temp = temp -> getLeftBrother();
         result++;

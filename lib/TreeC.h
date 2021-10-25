@@ -96,7 +96,7 @@ void Tree< T > :: deleteLeaf(NodeTreeC< T > *node) {
 */
 template < typename T >
 void Tree< T > :: modifyTag(NodeTreeC< T > *node, T newTag) {
-
+    node -> setObject(newTag);
 }
 
 /*
@@ -106,7 +106,7 @@ void Tree< T > :: modifyTag(NodeTreeC< T > *node, T newTag) {
 */
 template < typename T >
 NodeTreeC< T > Tree< T > :: *getRoot() {
-    //return root;
+    return root;
 }
 
 /*
@@ -156,7 +156,13 @@ int Tree< T > :: numNodes() {
 */
 template < typename T >
 int Tree< T > :: numSons(NodeTreeC< T > *node) {
-
+    int result = 0;
+    NodeTreeD< T > *temp = node -> getLeftmostSon();
+    while(temp) {
+        temp = temp -> getLeftBrother();
+        result++;
+    }
+    return result;
 }
 
 /*
@@ -176,7 +182,7 @@ bool Tree< T > :: empty() {
 */
 template < typename T >
 T Tree< T > :: tag(NodeTreeC< T > *node) {
-   // return node -> getObject();
+   return node -> getObject();
 }
 
 /*
