@@ -172,7 +172,7 @@ bool Tree< T > :: empty() {
 */
 template < typename T >
 T Tree< T > :: tag(NodeTreeC< T > node) {
-    return node -> getObject();
+   // return node -> getObject();
 }
 
 /*

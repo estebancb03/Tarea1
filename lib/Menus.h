@@ -4,8 +4,8 @@
 #include "Queue.h"
 //#include "TreeA.h"
 //#include "TreeB.h"
-#include "TreeC.h"
-//#include "TreeD.h"
+//#include "TreeC.h"
+#include "TreeD.h"
 //#include "TreeE.h"
 using namespace std;
 template <class T>
@@ -351,7 +351,7 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 9: {
 				system("cls");
-				cout << "Raiz: " << arbol -> getRoot() << endl << endl;
+				cout << "Raiz: " << arbol -> tag(arbol -> getRoot()) << endl << endl;
 				system("pause");
 			}	break;
 			case 10: {
