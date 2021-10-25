@@ -105,7 +105,7 @@ void Tree< T > :: modifyTag(NodeTreeC< T > *node, T newTag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeC< T > Tree< T > :: *getRoot() {
+NodeTreeC< T >* Tree< T > :: getRoot() {
     return root;
 }
 
@@ -115,7 +115,7 @@ NodeTreeC< T > Tree< T > :: *getRoot() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeC< T > Tree< T > :: *father(NodeTreeC< T > *node) {
+NodeTreeC< T >* Tree< T > :: father(NodeTreeC< T > *node) {
 
 }
 
@@ -125,7 +125,7 @@ NodeTreeC< T > Tree< T > :: *father(NodeTreeC< T > *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeC< T > Tree< T > :: *leftmostSon(NodeTreeC< T > *node) {
+NodeTreeC< T >* Tree< T > :: leftmostSon(NodeTreeC< T > *node) {
     return node -> getLeftmostSon();
 }
 
@@ -135,7 +135,7 @@ NodeTreeC< T > Tree< T > :: *leftmostSon(NodeTreeC< T > *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeC< T > Tree< T > :: *rightBrother(NodeTreeC< T > *node) {
+NodeTreeC< T >* Tree< T > :: rightBrother(NodeTreeC< T > *node) {
     return node -> getRightBrother();
 }
 
@@ -157,9 +157,9 @@ int Tree< T > :: numNodes() {
 template < typename T >
 int Tree< T > :: numSons(NodeTreeC< T > *node) {
     int result = 0;
-    NodeTreeD< T > *temp = node -> getLeftmostSon();
+    NodeTreeC< T > *temp = node -> getLeftmostSon();
     while(temp) {
-        temp = temp -> getLeftBrother();
+        temp = temp -> getRightBrother();
         result++;
     }
     return result;
@@ -202,7 +202,7 @@ bool Tree< T > :: exist(T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeC< T > Tree< T > :: *search(T tag) {
+NodeTreeC< T >* Tree< T > :: search(T tag) {
 
 }
 
