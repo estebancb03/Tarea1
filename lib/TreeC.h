@@ -10,7 +10,7 @@ class Tree {
         void destroy();
         void clear();
         bool search(T tag);
-        NodeTreeC< T > search(T tag);
+        NodeTreeC< T > search2(T tag);
         void setRoot(T tag);
         void addSon(NodeTreeC< T > father, T sonTag);
         void deleteLeaf(NodeTreeC< T > node);
