@@ -1,5 +1,5 @@
-#ifndef NODETREEC_H
-#define NODETREEC_H
+#ifndef NODE_H
+#define NODE_H
 template < class T >
 
 class Node {
@@ -7,7 +7,7 @@ class Node {
     Node< T > *leftmostSon;
     Node< T > *rightBrother;
     public:
-        Node(T o) { object = o; leftmostSon = nullptr; rightBrother = nullptr };
+        Node(T o) { object = o; leftmostSon = nullptr; rightBrother = nullptr; };
         Node< T > *getLeftmostSon() { return leftmostSon; };
         Node< T > *getRightBrother() { return rightBrother; };
         T getObject() { return object; };

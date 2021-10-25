@@ -1,8 +1,10 @@
 #ifndef TREEC_H
 #define TREEC_H
+#include "NodeTreeC.h"
 template < class T >
 
 class Tree {
+    Node< T > *root;
     public:
         void create();
         void destroy();
@@ -11,7 +13,7 @@ class Tree {
         void addSon(T tag, T sonTag );
         void deleteLeaf(T tag);
         void modifyTag(T oldTag, T newTag);
-        T root();
+        T getRoot();
         T father(T tag);
         T leftmostSon(T tag);
         T rightBrother(T tag);
@@ -28,7 +30,7 @@ class Tree {
 */
 template < typename T >
 void Tree< T > :: create() {
-
+    root = nullptr;
 }
 
 /*
@@ -97,7 +99,7 @@ void Tree< T > :: modifyTag(T oldTag, T newTag) {
     MODIFICA: 
 */
 template < typename T >
-T Tree< T > :: root() {
+T Tree< T > :: getRoot() {
 
 }
 

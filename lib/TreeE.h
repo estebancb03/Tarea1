@@ -12,7 +12,7 @@ class Tree {
         void addSon(T tag, T sonTag );
         void deleteLeaf(T tag);
         void modifyTag(T oldTag, T newTag);
-        T root();
+        T getRoot();
         T father(T tag);
         T leftmostSon(T tag);
         T rightBrother(T tag);
@@ -98,7 +98,7 @@ void Tree< T > :: modifyTag(T oldTag, T newTag) {
     MODIFICA: 
 */
 template < typename T >
-T Tree< T > :: root() {
+T Tree< T > :: getRoot() {
 
 }
 
