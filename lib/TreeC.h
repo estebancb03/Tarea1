@@ -26,9 +26,9 @@ class Tree {
 };
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: crea la instancia del árbol
+    REQUIERE: árbol sin crear o destruido
+    MODIFICA: árbol
 */
 template < typename T >
 void Tree< T > :: create() {
@@ -36,9 +36,9 @@ void Tree< T > :: create() {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: destruye el árbol
+    REQUIERE: árbol creado
+    MODIFICA: árbol
 */
 template < typename T >
 void Tree< T > :: destroy() {
@@ -46,9 +46,9 @@ void Tree< T > :: destroy() {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: elimina todos los nodos del árbol
+    REQUIERE: árbol creado
+    MODIFICA: árbol
 */
 template < typename T >
 void Tree< T > :: clear() {
@@ -56,9 +56,9 @@ void Tree< T > :: clear() {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: pone el nod raíz del árbol
+    REQUIERE: árbol creado
+    MODIFICA: árbol
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
@@ -66,9 +66,9 @@ void Tree< T > :: setRoot(T tag) {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: agrega al nodo un hijo con esa etiqueta
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: árbol
 */
 template < typename T >
 void Tree< T > :: addSon(NodeTreeC< T > father, T sonTag) {
@@ -76,9 +76,9 @@ void Tree< T > :: addSon(NodeTreeC< T > father, T sonTag) {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: elimima el nodo
+    REQUIERE: árbol creado, nodo sin hijos y válido 
+    MODIFICA: árbol
 */
 template < typename T >
 void Tree< T > :: deleteLeaf(NodeTreeC< T > node) {
@@ -86,9 +86,9 @@ void Tree< T > :: deleteLeaf(NodeTreeC< T > node) {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: modifica la etiqueta de un nodo
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: árbol
 */
 template < typename T >
 void Tree< T > :: modifyTag(NodeTreeC< T > node, T newTag) {
@@ -96,9 +96,9 @@ void Tree< T > :: modifyTag(NodeTreeC< T > node, T newTag) {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: devuelve el nodo raíz del árbol
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 T Tree< T > :: getRoot() {
@@ -106,9 +106,9 @@ T Tree< T > :: getRoot() {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: devuelve el nodo padre de un nodo
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 T Tree< T > :: father(NodeTreeC< T > node) {
@@ -116,9 +116,9 @@ T Tree< T > :: father(NodeTreeC< T > node) {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: devuelve el hijo más izquierdo del padre si tiene, y si no devuelve nulo
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 T Tree< T > :: leftmostSon(NodeTreeC< T > node) {
@@ -126,9 +126,9 @@ T Tree< T > :: leftmostSon(NodeTreeC< T > node) {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: devuelve el hermano derecho si tiene, y si no existe devuelve nulo.
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 T Tree< T > :: rightBrother(NodeTreeC< T > node) {
@@ -136,9 +136,9 @@ T Tree< T > :: rightBrother(NodeTreeC< T > node) {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: devuelve el número de nodos que hay en el árbol
+    REQUIERE: árbol creado
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 int Tree< T > :: numNodes() {
@@ -146,9 +146,9 @@ int Tree< T > :: numNodes() {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: devuelve el número de hijos de un nodo
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 int Tree< T > :: numSons(NodeTreeC< T > node) {
