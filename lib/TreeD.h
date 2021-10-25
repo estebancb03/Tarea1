@@ -4,6 +4,7 @@
 template < class T >
 
 class Tree {
+    int nodesNumber;
     NodeTreeD< T > *root;
     public:
         void create();
@@ -33,6 +34,7 @@ class Tree {
 template < typename T >
 void Tree< T > :: create() {
     root = nullptr;
+    nodesNumber = 0;
 }
 
 /*
@@ -52,7 +54,7 @@ void Tree< T > :: destroy() {
 */
 template < typename T >
 void Tree< T > :: clear() {
-
+    nodesNumber = 0;
 }
 
 /*
@@ -62,6 +64,8 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
+    if(this -> empty())
+        nodesNumber++;
     root = new NodeTreeD< T >(tag);
 }
 
@@ -72,7 +76,7 @@ void Tree< T > :: setRoot(T tag) {
 */
 template < typename T >
 void Tree< T > :: addSon(NodeTreeD< T > father, T sonTag) {
-
+    nodesNumber++;
 }
 
 /*
@@ -82,7 +86,7 @@ void Tree< T > :: addSon(NodeTreeD< T > father, T sonTag) {
 */
 template < typename T >
 void Tree< T > :: deleteLeaf(NodeTreeD< T > node) {
-
+    nodesNumber--;
 }
 
 /*
@@ -142,7 +146,7 @@ NodeTreeD< T > Tree< T > :: rightBrother(NodeTreeD< T > node) {
 */
 template < typename T >
 int Tree< T > :: numNodes() {
-
+    return nodesNumber;
 }
 
 /*

@@ -404,7 +404,7 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 14: {
 				system("cls");
-				cout << "Numero de nodos: " << arbol -> numNodes();
+				cout << "Numero de nodos: " << arbol -> numNodes() << endl << endl;
 				system("pause");
 			}	break;
 			case 15: {
