@@ -281,6 +281,8 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 2: {
 				system("cls");
+				arbol -> destroy();
+				cout << "Arbol destruido correctamente" << endl << endl;
 				system("pause");
 			}	break;
 			case 3: {

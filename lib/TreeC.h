@@ -40,7 +40,7 @@ void Tree< T > :: create() {
 */
 template < typename T >
 void Tree< T > :: destroy() {
-
+    delete root;
 }
 
 /*
