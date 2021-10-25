@@ -13,16 +13,16 @@ class Tree {
         void addSon(NodeTreeC< T > father, T sonTag);
         void deleteLeaf(NodeTreeC< T > node);
         void modifyTag(NodeTreeC< T > node, T newTag);
-        T getRoot();
-        T father(NodeTreeC< T > node);
-        T leftmostSon(NodeTreeC< T > node);
-        T rightBrother(NodeTreeC< T > node);
         T tag(NodeTreeC< T > node);
-        NodeTreeC< T > search2(T tag);
+        NodeTreeC< T > father(NodeTreeC< T > node);
+        NodeTreeC< T > leftmostSon(NodeTreeC< T > node);
+        NodeTreeC< T > rightBrother(NodeTreeC< T > node);
+        NodeTreeC< T > getRoot();
+        NodeTreeC< T > search(T tag);
         int numNodes();
         int numSons(NodeTreeC< T > node);
         bool empty();
-        bool search(T tag);
+        bool exist(T tag);
 };
 
 /*
@@ -101,7 +101,7 @@ void Tree< T > :: modifyTag(NodeTreeC< T > node, T newTag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-T Tree< T > :: getRoot() {
+NodeTreeC< T > Tree< T > :: getRoot() {
     return root -> getObject();
 }
 
@@ -111,7 +111,7 @@ T Tree< T > :: getRoot() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-T Tree< T > :: father(NodeTreeC< T > node) {
+NodeTreeC< T > Tree< T > :: father(NodeTreeC< T > node) {
 
 }
 
@@ -121,7 +121,7 @@ T Tree< T > :: father(NodeTreeC< T > node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-T Tree< T > :: leftmostSon(NodeTreeC< T > node) {
+NodeTreeC< T > Tree< T > :: leftmostSon(NodeTreeC< T > node) {
 
 }
 
@@ -131,7 +131,7 @@ T Tree< T > :: leftmostSon(NodeTreeC< T > node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-T Tree< T > :: rightBrother(NodeTreeC< T > node) {
+NodeTreeC< T > Tree< T > :: rightBrother(NodeTreeC< T > node) {
 
 }
 
@@ -181,7 +181,7 @@ T Tree< T > :: tag(NodeTreeC< T > node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-bool Tree< T > :: search(T tag) {
+bool Tree< T > :: exist(T tag) {
     bool result = false;
     return result;
 }
@@ -192,7 +192,7 @@ bool Tree< T > :: search(T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeC< T > Tree< T > :: search2(T tag) {
+NodeTreeC< T > Tree< T > :: search(T tag) {
 
 }
 
