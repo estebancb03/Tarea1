@@ -20,7 +20,7 @@ class Menus {
 
 /*
 	EFECTO: maneja el desplazamiento entre los otros menus
-	REQUIERE: no tiene requerimientos, solo se le invoca en el Main.cpp
+	REQUIERE: no tiene requerimientos
 	MODIFICA: no hace modificaciones
 */
 template < typename T >
@@ -52,6 +52,11 @@ void Menus< T > :: principalMenu() {
 	}
 }
 
+/*
+	EFECTO: maneja el uso de los métodos de la clase Queue
+	REQUIERE: no tiene requerimientos
+	MODIFICACIONES: varias modificaciones de acuerdo a las opciones elegidas
+*/
 template < typename T >
 void Menus< T > :: queueMenu() {
 	bool enabled = true;
