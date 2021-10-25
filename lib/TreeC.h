@@ -10,7 +10,7 @@ class Tree {
         void destroy();
         void clear();
         void setRoot(T tag);
-        void addSon(T tag, T sonTag );
+        void addSon(T tag, T sonTag);
         void deleteLeaf(T tag);
         void modifyTag(T oldTag, T newTag);
         T getRoot();
@@ -100,7 +100,7 @@ void Tree< T > :: modifyTag(T oldTag, T newTag) {
 */
 template < typename T >
 T Tree< T > :: getRoot() {
-
+    return root -> getObject();
 }
 
 /*

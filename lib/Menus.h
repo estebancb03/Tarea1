@@ -315,6 +315,8 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 9: {
 				system("cls");
+				T rootTag = arbol -> getRoot();
+				cout << "Raiz: " << rootTag << endl << endl;
 				system("pause");
 			}	break;
 			case 10: {
