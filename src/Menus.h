@@ -240,6 +240,11 @@ void Menus< T > :: pipeMenu() {
 	}
 }
 
+/*
+	EFECTO: maneja el uso de los métodos de la clase Tree
+	REQUIERE: no tiene requerimientos
+	MODIFICACIONES: varias modificaciones en el árbol de acuerdo a las opciones elegidas
+*/
 template < typename T >
 void Menus< T > :: treeMenu() {
 	bool enabled = true;
