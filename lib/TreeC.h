@@ -156,13 +156,25 @@ int Tree< T > :: numSons(NodeTreeC< T > node) {
 }
 
 /*
-    EFECTO: 
-    REQUIERE: 
-    MODIFICA: 
+    EFECTO: devuelve un verdadero si el árbol tiene nodos, si no devuelve falso
+    REQUIERE: árbol creado
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 bool Tree< T > :: empty() {
     return root == nullptr ? true : false;
 }
+
+/*
+    EFECTO: devuelve la etiqueta de un nodo
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+T Tree< T > :: tag(NodeTreeC< T > node) {
+    return node -> getObject();
+}
+
+
 
 #endif
