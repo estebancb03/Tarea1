@@ -291,6 +291,11 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 4: {
 				system("cls");
+				cout << "Estado del arbol: ";
+				if(arbol -> empty()) 
+					cout << "vacio" << endl << endl;
+				else
+					cout << "no vacio" << endl << endl;
 				system("pause");
 			}	break;
 			case 5: {

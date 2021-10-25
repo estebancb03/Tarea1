@@ -4,7 +4,7 @@
 template < class T >
 
 class Tree {
-    Node< T > *root;
+    NodeTreeC< T > *root;
     public:
         void create();
         void destroy();
@@ -60,7 +60,7 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-    root = new Node< T >(tag);
+    root = new NodeTreeC< T >(tag);
 }
 
 /*
@@ -160,7 +160,7 @@ int Tree< T > :: numSons(T tag) {
 */
 template < typename T >
 bool Tree< T > :: empty() {
-
+    return root == nullptr ? true : false;
 }
 
 #endif

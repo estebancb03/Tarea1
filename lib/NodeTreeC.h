@@ -1,18 +1,18 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef NODETREEC_H
+#define NODETREEC_H
 template < class T >
 
-class Node {
+class NodeTreeC {
     T object;
-    Node< T > *leftmostSon;
-    Node< T > *rightBrother;
+    NodeTreeC< T > *leftmostSon;
+    NodeTreeC< T > *rightBrother;
     public:
-        Node(T o) { object = o; leftmostSon = nullptr; rightBrother = nullptr; };
-        Node< T > *getLeftmostSon() { return leftmostSon; };
-        Node< T > *getRightBrother() { return rightBrother; };
+        NodeTreeC(T o) { object = o; leftmostSon = nullptr; rightBrother = nullptr; };
+        NodeTreeC< T > *getLeftmostSon() { return leftmostSon; };
+        NodeTreeC< T > *getRightBrother() { return rightBrother; };
         T getObject() { return object; };
-        void setLeftmostSon(Node< T > *ls) { leftmostSon = ls; };
-        void setRightBrother(Node< T > *rb) { rightBrother = rb; };
+        void setLeftmostSon(NodeTreeC< T > *ls) { leftmostSon = ls; };
+        void setRightBrother(NodeTreeC< T > *rb) { rightBrother = rb; };
 };
 
 #endif 
