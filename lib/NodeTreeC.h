@@ -11,6 +11,7 @@ class NodeTreeC {
         NodeTreeC< T > *getLeftmostSon() { return leftmostSon; };
         NodeTreeC< T > *getRightBrother() { return rightBrother; };
         T getObject() { return object; };
+        void setObject(T o) { object = o; };
         void setLeftmostSon(NodeTreeC< T > *ls) { leftmostSon = ls; };
         void setRightBrother(NodeTreeC< T > *rb) { rightBrother = rb; };
 };
