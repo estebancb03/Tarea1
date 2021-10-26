@@ -80,7 +80,7 @@ void Tree< T > :: addSon(NodeTreeD< T > *father, T sonTag) {
         father -> setLeftmostSon(new NodeTreeD< T >(sonTag));
     }
     else{
-        NodeTreeD< T > *temp = father;
+        NodeTreeD< T > *temp = father -> getLeftmostSon();
         while(temp -> getRightBrother()) {
             temp = temp -> getRightBrother();
         }
