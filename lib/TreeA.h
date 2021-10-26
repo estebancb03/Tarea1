@@ -1,12 +1,13 @@
 #ifndef TREEA_H
 #define TREEA_H
 #include "NodeTreeA.h"
+#include <vector>
 template < class T >
 
 class Tree {
     int size;
     int nodesNumber;
-    NodeTreeA< T > *array;
+    vector< NodeTreeA< T > > tree;
     public:
         void create();
         void destroy();
@@ -36,7 +37,7 @@ template < typename T >
 void Tree< T > :: create() {
     size = 10;
     nodesNumber = 0;
-    array = new NodeTreeA< T >[size];
+    tree.reserve(size);
 }
 
 /*
@@ -46,7 +47,7 @@ void Tree< T > :: create() {
 */
 template < typename T >
 void Tree< T > :: destroy() {
-    //delete []array;
+    //delete tree;
 }
 
 /*
@@ -56,7 +57,7 @@ void Tree< T > :: destroy() {
 */
 template < typename T >
 void Tree< T > :: clear() {
-    
+    tree.erase(tree.begin(),tree.end());
 }
 
 /*
@@ -66,8 +67,9 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-    NodeTreeA< T > *root = new NodeTreeA< T >(tag,0,-1);
-    tree[0] = root;
+    NodeTreeA< T > *root = new NodeTreeA< T >(tag);
+    root -> setFatherPosition(-1);
+    tree.push_back(root);
 }
 
 /*

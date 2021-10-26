@@ -7,13 +7,13 @@ class NodeTreeA {
     int position;
     int fatherPosition;
     public:
-        NodeTreeA(T o, int p, int fp) { object = o; position = p; fatherPosition = fp; };
+        NodeTreeA(T o) { object = o; position = 0; fatherPosition = 0; };
         T getObject() { return object; };
-        T getposition() { return position; };
-        T getFatherPosition() { return fatherPosition; };
-        void setObject(T o) { object = o; };
-        void setPosition(T p) { position = p; };
-        void setFatherPosition(T fp) { fatherPosition = fp; };
+        int getposition() { return position; };
+        int getFatherPosition() { return fatherPosition; };
+        void setObject(int o) { object = o; };
+        void setPosition(int p) { position = p; };
+        void setFatherPosition(int fp) { fatherPosition = fp; };
 };
 
 #endif 
