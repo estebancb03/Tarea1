@@ -78,14 +78,12 @@ void Tree< T > :: setRoot(T tag) {
 */
 template < typename T >
 void Tree< T > :: addSon(NodeTreeD< T > *father, T sonTag) {
-    if(!father -> getLeftmostSon()) {
+    if(!father -> getLeftmostSon()) 
         father -> setLeftmostSon(new NodeTreeD< T >(sonTag));
-    }
     else{
         NodeTreeD< T > *temp = father -> getLeftmostSon();
-        while(temp -> getRightBrother()) {
+        while(temp -> getRightBrother()) 
             temp = temp -> getRightBrother();
-        }
         temp -> setRightBrother(new NodeTreeD< T >(sonTag));
     }
     nodesNumber++;
@@ -98,7 +96,6 @@ void Tree< T > :: addSon(NodeTreeD< T > *father, T sonTag) {
 */
 template < typename T >
 void Tree< T > :: deleteLeaf(NodeTreeD< T > *node) {
-    node = nullptr;
     delete node;
     nodesNumber--;
 }
@@ -130,7 +127,7 @@ NodeTreeD< T >* Tree< T > :: getRoot() {
 */
 template < typename T >
 NodeTreeD< T >* Tree< T > :: father(NodeTreeD< T > *node) {
-    
+   
 }
 
 /*

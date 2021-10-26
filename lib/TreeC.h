@@ -19,7 +19,7 @@ class Tree {
         NodeTreeC< T > *leftmostSon(NodeTreeC< T > *node);
         NodeTreeC< T > *rightBrother(NodeTreeC< T > *node);
         NodeTreeC< T > *getRoot();
-        NodeTreeC< T > *search(T tag);
+        NodeTreeC< T > *search(NodeTreeC< T > *newRoot, T tag);
         int numNodes();
         int numSons(NodeTreeC< T > *node);
         bool empty();
@@ -54,6 +54,8 @@ void Tree< T > :: destroy() {
 */
 template < typename T >
 void Tree< T > :: clear() {
+    this -> destroy();
+    this -> create();
     nodesNumber = 0;
 }
 
@@ -76,15 +78,14 @@ void Tree< T > :: setRoot(T tag) {
 */
 template < typename T >
 void Tree< T > :: addSon(NodeTreeC< T > *father, T sonTag) {
-    NodeTreeC< T > *temp = father -> getLeftmostSon();
-    if(temp) {
-        while(temp -> getRightBrother()) {
+    if(!father -> getLeftmostSon()) 
+        father -> setLeftmostSon(new NodeTreeC< T >(sonTag));
+    else{
+        NodeTreeC< T > *temp = father -> getLeftmostSon();
+        while(temp -> getRightBrother()) 
             temp = temp -> getRightBrother();
-        }
         temp -> setRightBrother(new NodeTreeC< T >(sonTag));
     }
-    else
-        temp -> setLeftmostSon(new NodeTreeC< T >(sonTag));
     nodesNumber++;
 }
 
@@ -95,6 +96,7 @@ void Tree< T > :: addSon(NodeTreeC< T > *father, T sonTag) {
 */
 template < typename T >
 void Tree< T > :: deleteLeaf(NodeTreeC< T > *node) {
+    delete node;
     nodesNumber--;
 }
 
@@ -201,8 +203,8 @@ T Tree< T > :: tag(NodeTreeC< T > *node) {
 */
 template < typename T >
 bool Tree< T > :: exist(T tag) {
-    bool result = false;
-    return result;
+    NodeTreeC< T > *temp = this -> search(root,tag);
+    return temp != nullptr ? true : false;
 }
 
 /*
@@ -211,8 +213,21 @@ bool Tree< T > :: exist(T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeC< T >* Tree< T > :: search(T tag) {
-    
+NodeTreeC< T >* Tree< T > :: search(NodeTreeC< T > *newRoot, T tag) {
+    NodeTreeC< T > *temp = nullptr;
+    if(newRoot == nullptr)
+        return nullptr;
+    while(newRoot) {
+        if(newRoot -> getObject() == tag)
+            return newRoot;
+        if(newRoot -> getLeftmostSon()) {
+            temp = search(newRoot -> getLeftmostSon(), tag);
+            if(temp)
+                return temp;
+        }
+        newRoot = newRoot -> getRightBrother();
+    }
+    return temp;
 }
 
 #endif
