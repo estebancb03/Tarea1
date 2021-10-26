@@ -20,7 +20,7 @@ class Tree {
         NodeTreeA< T > *leftmostSon(NodeTreeA< T > *node);
         NodeTreeA< T > *rightBrother(NodeTreeA< T > *node);
         NodeTreeA< T > *getRoot();
-        NodeTreeA< T > *search(T tag);
+        NodeTreeA< T > *search(NodeTreeA< T > *newRoot, T tag);
         int numNodes();
         int numSons(NodeTreeA< T > *node);
         bool empty();
@@ -46,7 +46,7 @@ void Tree< T > :: create() {
 */
 template < typename T >
 void Tree< T > :: destroy() {
-    delete []array;
+    //delete []array;
 }
 
 /*
@@ -56,12 +56,7 @@ void Tree< T > :: destroy() {
 */
 template < typename T >
 void Tree< T > :: clear() {
-    if(!this -> empty()) {
-        for(int i = 0; i < numNodes; ++i) {
-            delete array[i];
-        }
-        numNodes = 0;
-    }
+    
 }
 
 /*
@@ -71,7 +66,8 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-    array[0] = new NodeTreeA< T >(tag, 0, -1);
+    NodeTreeA< T > *root = new NodeTreeA< T >(tag,0,-1);
+    tree[0] = root;
 }
 
 /*
@@ -141,7 +137,7 @@ NodeTreeA< T >* Tree< T > :: leftmostSon(NodeTreeA< T > *node) {
 */
 template < typename T >
 NodeTreeA< T >* Tree< T > :: rightBrother(NodeTreeA< T > *node) {
-    
+
 }
 
 /*
@@ -171,7 +167,7 @@ int Tree< T > :: numSons(NodeTreeA< T > *node) {
 */
 template < typename T >
 bool Tree< T > :: empty() {
-    return nodesNumber == 0 ? true : false;
+    
 }
 
 /*
@@ -200,8 +196,8 @@ bool Tree< T > :: exist(T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeA< T >* Tree< T > :: search(T tag) {
-
+NodeTreeA< T >* Tree< T > :: search(NodeTreeA< T > *newRoot, T tag) {
+   
 }
 
 #endif
