@@ -20,6 +20,7 @@ class Tree {
         NodeTreeC< T > *rightBrother(NodeTreeC< T > *node);
         NodeTreeC< T > *getRoot();
         NodeTreeC< T > *search(NodeTreeC< T > *newRoot, T tag);
+        NodeTreeC< T > *searchLeftBrother(NodeTreeC< T > *node, NodeTreeC< T > *actual);
         NodeTreeC< T > *searchFather(NodeTreeC< T > *node, NodeTreeC< T > *actual, NodeTreeC< T > *actualFather);
         int numNodes();
         int numSons(NodeTreeC< T > *node);
@@ -97,7 +98,27 @@ void Tree< T > :: addSon(NodeTreeC< T > *father, T sonTag) {
 */
 template < typename T >
 void Tree< T > :: deleteLeaf(NodeTreeC< T > *node) {
-    delete node;
+    if (node -> getRightBrother()) {
+        NodeTreeC< T > *left = this -> searchLeftBrother(node, root);
+        if (left) {
+          left -> setRightBrother(node -> getRightBrother());
+          delete node;
+        }
+    } 
+    else {
+        if(searchLeftBrother(node, root)) {
+            searchLeftBrother(node, root) -> setRightBrother(nullptr);
+        }
+        else {
+            NodeTreeC< T > *father = searchFather(node, root, root);
+            if(father) {
+                father -> setLeftmostSon(nullptr);
+                delete node;
+            } 
+            else 
+                root = nullptr;
+        }
+      }
     nodesNumber--;
 }
 
@@ -170,6 +191,7 @@ NodeTreeC< T >* Tree< T > :: leftmostSon(NodeTreeC< T > *node) {
 template < typename T >
 NodeTreeC< T >* Tree< T > :: rightBrother(NodeTreeC< T > *node) {
     return node -> getRightBrother();
+    //return this -> searchLeftBrother(node, root);
 }
 
 /*
@@ -248,6 +270,26 @@ NodeTreeC< T >* Tree< T > :: search(NodeTreeC< T > *newRoot, T tag) {
                 return temp;
         }
         newRoot = newRoot -> getRightBrother();
+    }
+    return temp;
+}
+
+/*
+    EFECTO: devuelve el nodo hermano izquierdo
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+NodeTreeC< T >* Tree< T > :: searchLeftBrother(NodeTreeC< T > *node, NodeTreeC< T > *actual) {
+    NodeTreeC< T > *temp = nullptr;
+    if (actual -> getRightBrother() == node)
+        temp = actual; 
+    else {
+        actual = actual -> getLeftmostSon();
+        while (actual && !temp) {
+            temp = searchLeftBrother(node, actual);
+            actual = actual -> getRightBrother();
+        }
     }
     return temp;
 }
