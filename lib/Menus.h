@@ -287,6 +287,8 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 3: {
 				system("cls");
+				arbol -> clear();
+				cout << "Arbol vaciado corectamente" << endl << endl;
 				system("pause");
 			}	break;
 			case 4: {

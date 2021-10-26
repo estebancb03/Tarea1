@@ -54,6 +54,8 @@ void Tree< T > :: destroy() {
 */
 template < typename T >
 void Tree< T > :: clear() {
+    this -> destroy();
+    this -> create();
     nodesNumber = 0;
 }
 
@@ -96,6 +98,7 @@ void Tree< T > :: addSon(NodeTreeD< T > *father, T sonTag) {
 */
 template < typename T >
 void Tree< T > :: deleteLeaf(NodeTreeD< T > *node) {
+    node = nullptr;
     delete node;
     nodesNumber--;
 }
