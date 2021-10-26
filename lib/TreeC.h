@@ -76,6 +76,15 @@ void Tree< T > :: setRoot(T tag) {
 */
 template < typename T >
 void Tree< T > :: addSon(NodeTreeC< T > *father, T sonTag) {
+    NodeTreeC< T > *temp = father -> getLeftmostSon();
+    if(temp) {
+        while(temp -> getRightBrother()) {
+            temp = temp -> getRightBrother();
+        }
+        temp -> setRightBrother(new NodeTreeC< T >(sonTag));
+    }
+    else
+        temp -> setLeftmostSon(new NodeTreeC< T >(sonTag));
     nodesNumber++;
 }
 
@@ -203,7 +212,7 @@ bool Tree< T > :: exist(T tag) {
 */
 template < typename T >
 NodeTreeC< T >* Tree< T > :: search(T tag) {
-
+    
 }
 
 #endif
