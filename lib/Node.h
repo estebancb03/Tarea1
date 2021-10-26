@@ -7,7 +7,6 @@ class Node {
     Node< T > *next;
     public:
         Node(T o) { object = o; next = nullptr; };
-       // ~Node() { /*delete object;*/ delete this; };
         Node< T > *getNext() { return next; };
         T getObject() { return object; };
         void setNext(Node< T > *n) { next = n; };

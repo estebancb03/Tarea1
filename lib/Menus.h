@@ -4,8 +4,8 @@
 #include "Queue.h"
 //#include "TreeA.h"
 //#include "TreeB.h"
-#include "TreeC.h"
-//#include "TreeD.h"
+//#include "TreeC.h"
+#include "TreeD.h"
 //#include "TreeE.h"
 using namespace std;
 template <class T>
@@ -313,7 +313,7 @@ void Menus< T > :: treeMenu() {
 				if(arbol -> exist(fatherTag)) {
 					T sonTag;
 					cout << "Nodo hijo: "; cin >> sonTag;
-					arbol -> addSon(arbol -> search(fatherTag), sonTag);
+					arbol -> addSon(arbol -> search(arbol -> getRoot(),fatherTag), sonTag);
 					cout << "Hijo agregado correctamente" << endl << endl;
 				}
 				else {
@@ -326,7 +326,7 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				if(arbol -> exist(tag)) {
-					arbol -> deleteLeaf(arbol -> search(tag));
+					arbol -> deleteLeaf(arbol -> search(arbol -> getRoot(),tag));
 					cout << "Hoja borrada correctamente" << endl << endl;
 				}
 				else {
@@ -341,7 +341,7 @@ void Menus< T > :: treeMenu() {
 				if(arbol -> exist(tag)) {
 					T newTag;
 					cout << "Nueva etiqueta: "; cin >> newTag;
-					arbol -> modifyTag(arbol -> search(tag), newTag);
+					arbol -> modifyTag(arbol -> search(arbol -> getRoot(), tag), newTag);
 					cout << "Nodo modificado correctamente" << endl << endl;
 				}
 				else {
@@ -359,7 +359,10 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				if(arbol -> exist(tag)) {
-					cout << "Padre: " << arbol -> tag(arbol -> father(arbol -> search(tag))) << endl << endl;
+					if(arbol -> father(arbol -> search(arbol -> getRoot(),tag)))
+						cout << "Padre: " << arbol -> tag(arbol -> father(arbol -> search(arbol -> getRoot(),tag))) << endl << endl;
+					else
+						cout << "Padre: nullptr" << endl << endl;
 				}
 				else {
 					cout << "Error: el nodo no existe" << endl << endl;
@@ -371,7 +374,10 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				if(arbol -> exist(tag)) {
-					cout << "Hijo mas izquierdo: " << arbol -> tag(arbol -> leftmostSon(arbol -> search(tag))) << endl << endl;
+					if(arbol -> leftmostSon(arbol -> search(arbol -> getRoot(),tag)))
+						cout << "Hijo mas izquierdo: " << arbol -> tag(arbol -> leftmostSon(arbol -> search(arbol -> getRoot(), tag))) << endl << endl;
+					else
+						cout << "Hijo mas izquierdo: nullptr" << endl << endl;
 				}
 				else {
 					cout << "Error: el nodo no existe" << endl << endl;
@@ -383,7 +389,10 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				if(arbol -> exist(tag)) {
-					cout << "Hermano derecho: " << arbol -> tag(arbol -> rightBrother(arbol -> search(tag))) << endl << endl;
+					if(arbol -> rightBrother(arbol -> search(arbol -> getRoot(),tag)))
+						cout << "Hermano derecho: " << arbol -> tag(arbol -> rightBrother(arbol -> search(arbol -> getRoot(), tag))) << endl << endl;
+					else
+						cout << "Hermano derecho: nullptr" << endl << endl;
 				}
 				else {
 					cout << "Error: el nodo no existe" << endl << endl;
@@ -395,7 +404,7 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Etiqueta: "; cin >> tag;
 				if(arbol -> exist(tag)) {
-					cout << "Resultado: " << arbol -> tag(arbol -> search(tag)) << endl << endl;
+					cout << "Resultado: " << arbol -> tag(arbol -> search(arbol -> getRoot(),tag)) << endl << endl;
 				}
 				else {
 					cout << "Error: el nodo no existe" << endl << endl;
@@ -412,7 +421,7 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				if(arbol -> exist(tag)) {
-					cout << "Numero de hijos: " << arbol -> numSons(arbol -> search(tag)) << endl << endl;
+					cout << "Numero de hijos: " << arbol -> numSons(arbol -> search(arbol -> getRoot(),tag)) << endl << endl;
 				}
 				else {
 					cout << "Error: el nodo no existe" << endl << endl;

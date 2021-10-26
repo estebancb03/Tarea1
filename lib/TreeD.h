@@ -19,7 +19,7 @@ class Tree {
         NodeTreeD< T > *leftmostSon(NodeTreeD< T > *node);
         NodeTreeD< T > *rightBrother(NodeTreeD< T > *node);
         NodeTreeD< T > *getRoot();
-        NodeTreeD< T > *search(T tag);
+        NodeTreeD< T > *search(NodeTreeD< T > *newRoot, T tag);
         int numNodes();
         int numSons(NodeTreeD< T > *node);
         bool empty();
@@ -76,6 +76,16 @@ void Tree< T > :: setRoot(T tag) {
 */
 template < typename T >
 void Tree< T > :: addSon(NodeTreeD< T > *father, T sonTag) {
+    if(!father -> getLeftmostSon()) {
+        father -> setLeftmostSon(new NodeTreeD< T >(sonTag));
+    }
+    else{
+        NodeTreeD< T > *temp = father;
+        while(temp -> getRightBrother()) {
+            temp = temp -> getRightBrother();
+        }
+        temp -> setRightBrother(new NodeTreeD< T >(sonTag));
+    }
     nodesNumber++;
 }
 
@@ -193,8 +203,8 @@ T Tree< T > :: tag(NodeTreeD< T > *node) {
 */
 template < typename T >
 bool Tree< T > :: exist(T tag) {
-    bool result = false;
-    return result;
+    NodeTreeD< T > *temp = this -> search(root,tag);
+    return temp != nullptr ? true : false;
 }
 
 /*
@@ -203,8 +213,21 @@ bool Tree< T > :: exist(T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeD< T >* Tree< T > :: search(T tag) {
-
+NodeTreeD< T >* Tree< T > :: search(NodeTreeD< T > *newRoot, T tag) {
+    NodeTreeD< T > *temp = nullptr;
+    if(newRoot == nullptr)
+        return nullptr;
+    while(newRoot) {
+        if(newRoot -> getObject() == tag)
+            return newRoot;
+        if(newRoot -> getLeftmostSon()) {
+            temp = search(newRoot -> getLeftmostSon(), tag);
+            if(temp)
+                return temp;
+        }
+        newRoot = newRoot -> getRightBrother();
+    }
+    return temp;
 }
 
 #endif
