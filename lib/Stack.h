@@ -1,11 +1,11 @@
-#ifndef PIPE_H
-#define PIPE_H
+#ifndef STACK_H
+#define STACK_H
 #include "Node.h"
 #include <sstream>
 using namespace std;
 template < class T >
 
-class Pipe {
+class Stack {
     Node< T > *head;
     public:
         void create();
@@ -24,7 +24,7 @@ class Pipe {
     MODIFICA: pila
 */
 template < typename T > 
-void Pipe< T > :: create() {
+void Stack< T > :: create() {
     head = nullptr;
 }
 
@@ -34,7 +34,7 @@ void Pipe< T > :: create() {
     MODIFICA: pila
 */
 template < typename T >
-void Pipe< T > :: destroy() {
+void Stack< T > :: destroy() {
     delete head;
 }
 
@@ -44,7 +44,7 @@ void Pipe< T > :: destroy() {
     MODIFICA: pila
 */
 template < typename T >
-void Pipe< T > :: push(T element) {
+void Stack< T > :: push(T element) {
     Node< T > *temp = new Node< T >(element);
     if(this -> empty()) {
         head = temp;
@@ -61,7 +61,7 @@ void Pipe< T > :: push(T element) {
     MODIFICA: pila
 */
 template <typename T>
-void Pipe< T > :: clear() {
+void Stack< T > :: clear() {
     if(!this -> empty()) {
         Node< T > *temp = head;
         while(head) {
@@ -78,7 +78,7 @@ void Pipe< T > :: clear() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-bool Pipe< T > :: empty() {
+bool Stack< T > :: empty() {
     return head == nullptr ? true : false;
 }
 
@@ -88,7 +88,7 @@ bool Pipe< T > :: empty() {
     MODIFICA: pila
 */
 template < typename T >
-T Pipe< T > :: pop() {
+T Stack< T > :: pop() {
     if(!this -> empty()) {
         Node< T > *temp = head;
         T element = temp -> getObject();
@@ -106,7 +106,7 @@ T Pipe< T > :: pop() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-T Pipe< T > :: top() {
+T Stack< T > :: top() {
     if(!this -> empty())
         return head -> getObject();
     else
@@ -119,7 +119,7 @@ T Pipe< T > :: top() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-void Pipe< T > :: print() {
+void Stack< T > :: print() {
     if(!this -> empty()) {
         cout << "---------------------------" << endl;
         Node< T > *temp = head;

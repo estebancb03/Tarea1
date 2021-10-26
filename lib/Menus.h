@@ -1,11 +1,11 @@
 #ifndef MENUS_H
 #define MENUS_H
-#include "Pipe.h"
+#include "Stack.h"
 #include "Queue.h"
 //#include "TreeA.h"
 //#include "TreeB.h"
-#include "TreeC.h"
-//#include "TreeD.h"
+//#include "TreeC.h"
+#include "TreeD.h"
 //#include "TreeE.h"
 using namespace std;
 template <class T>
@@ -14,7 +14,7 @@ class Menus {
     public:
         void principalMenu();
 		void queueMenu();
-        void pipeMenu();
+        void stackMenu();
 		void treeMenu();
 };
 
@@ -40,7 +40,7 @@ void Menus< T > :: principalMenu() {
 				queueMenu();
 			break;
 			case 2:
-				pipeMenu();
+				stackMenu();
 			break;
 			case 3:
 				treeMenu();
@@ -153,10 +153,10 @@ void Menus< T > :: queueMenu() {
 	MODIFICACIONES: varias modificaciones sobre la pila de acuerdo a las opciones elegidas
 */
 template < typename T >
-void Menus< T > :: pipeMenu() {
+void Menus< T > :: stackMenu() {
 	bool enabled = true;
 	int option = 0;
-	Pipe< T > *pila;
+	Stack< T > *pila;
 	while(enabled) {
 		system("cls");
 		cout << "M E N U  D E  O P C I O N E S  D E  P I L A" << endl << endl;
@@ -173,7 +173,7 @@ void Menus< T > :: pipeMenu() {
 		switch(option) {
 			case 1: {
 				system("cls");
-				pila = new Pipe< T >();
+				pila = new Stack< T >();
 				pila -> create();
 				cout << "Pila creada correctamente" << endl << endl;
 				system("pause");

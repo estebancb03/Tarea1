@@ -7,7 +7,7 @@ template < class T >
 class Tree {
     int size;
     int nodesNumber;
-    vector< NodeTreeA< T > > tree;
+    NodeTreeA< T > *tree;
     public:
         void create();
         void destroy();
@@ -37,7 +37,7 @@ template < typename T >
 void Tree< T > :: create() {
     size = 10;
     nodesNumber = 0;
-    tree.reserve(size);
+    tree = new NodeTreeA< T >[size];
 }
 
 /*
@@ -47,7 +47,7 @@ void Tree< T > :: create() {
 */
 template < typename T >
 void Tree< T > :: destroy() {
-    //delete tree;
+    delete []tree;
 }
 
 /*
@@ -57,7 +57,7 @@ void Tree< T > :: destroy() {
 */
 template < typename T >
 void Tree< T > :: clear() {
-    tree.erase(tree.begin(),tree.end());
+    
 }
 
 /*
@@ -67,9 +67,7 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-    NodeTreeA< T > *root = new NodeTreeA< T >(tag);
-    root -> setFatherPosition(-1);
-    tree.push_back(root);
+   
 }
 
 /*
