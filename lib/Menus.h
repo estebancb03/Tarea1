@@ -2,10 +2,10 @@
 #define MENUS_H
 #include "Pipe.h"
 #include "Queue.h"
-#include "TreeA.h"
+//#include "TreeA.h"
 //#include "TreeB.h"
 //#include "TreeC.h"
-//#include "TreeD.h"
+#include "TreeD.h"
 //#include "TreeE.h"
 using namespace std;
 template <class T>
@@ -361,7 +361,7 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				if(arbol -> exist(tag)) {
-					if(arbol -> father(arbol -> search(arbol -> getRoot(),tag)))
+					if(arbol -> father(arbol -> search(arbol -> getRoot(),tag)) && arbol -> father(arbol -> search(arbol -> getRoot(),tag)) != arbol -> search(arbol -> getRoot(),tag))
 						cout << "Padre: " << arbol -> tag(arbol -> father(arbol -> search(arbol -> getRoot(),tag))) << endl << endl;
 					else
 						cout << "Padre: nullptr" << endl << endl;

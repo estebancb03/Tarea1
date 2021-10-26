@@ -20,6 +20,7 @@ class Tree {
         NodeTreeD< T > *rightBrother(NodeTreeD< T > *node);
         NodeTreeD< T > *getRoot();
         NodeTreeD< T > *search(NodeTreeD< T > *newRoot, T tag);
+        NodeTreeD< T > *searchFather(NodeTreeD< T > *node, NodeTreeD< T > *actual, NodeTreeD< T > *actualFather);
         int numNodes();
         int numSons(NodeTreeD< T > *node);
         bool empty();
@@ -127,7 +128,28 @@ NodeTreeD< T >* Tree< T > :: getRoot() {
 */
 template < typename T >
 NodeTreeD< T >* Tree< T > :: father(NodeTreeD< T > *node) {
-   
+   return this -> searchFather(node, root, root);
+}
+
+/*
+    EFECTO: devuelve el nodo padre de un nodo
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+NodeTreeD< T >* Tree< T > :: searchFather(NodeTreeD< T > *node, NodeTreeD< T > *actual, NodeTreeD< T > *actualFather) {
+    NodeTreeD< T > *temp = nullptr;
+      if(actual != node) {
+          actualFather = actual;
+        actual = actual -> getLeftmostSon();
+        while(actual && !temp) {
+          temp = searchFather(node, actual, actualFather);
+          actual = actual -> getRightBrother();
+        }
+      }
+      else
+        temp = actualFather;
+      return temp;
 }
 
 /*
