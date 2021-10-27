@@ -20,7 +20,6 @@ class Tree {
         NodeTreeD< T > *rightBrother(NodeTreeD< T > *node);
         NodeTreeD< T > *getRoot();
         NodeTreeD< T > *search(NodeTreeD< T > *newRoot, T tag);
-        NodeTreeD< T > *searchFather(NodeTreeD< T > *node, NodeTreeD< T > *actual, NodeTreeD< T > *actualFather);
         int numNodes();
         int numSons(NodeTreeD< T > *node);
         bool empty();
@@ -79,15 +78,18 @@ void Tree< T > :: setRoot(T tag) {
 */
 template < typename T >
 void Tree< T > :: addSon(NodeTreeD< T > *father, T sonTag) {
-    if(!father -> getLeftmostSon()) 
-        father -> setLeftmostSon(new NodeTreeD< T >(sonTag));
+    NodeTreeD< T > *aux = new NodeTreeD< T >(sonTag);
+    if(!father -> getLeftmostSon()) {
+        father -> setLeftmostSon(aux);
+        aux -> setFather(father);
+    }
     else{
         NodeTreeD< T > *temp = father -> getLeftmostSon();
-        NodeTreeD< T > *aux = nullptr;
         while(temp -> getRightBrother()) 
             temp = temp -> getRightBrother();
         temp -> setRightBrother(new NodeTreeD< T >(sonTag));
         aux = temp -> getRightBrother();
+        aux -> setFather(father);
         aux -> setLeftBrother(temp);
     }
     nodesNumber++;
@@ -112,7 +114,7 @@ void Tree< T > :: deleteLeaf(NodeTreeD< T > *node) {
             node -> getLeftBrother() -> setRightBrother(nullptr);
         }
         else {
-            NodeTreeD< T > *father = searchFather(node, root, root);
+            NodeTreeD< T > *father = this -> father(node);
             if(father) {
                 father -> setLeftmostSon(nullptr);
                 delete node;
@@ -151,28 +153,7 @@ NodeTreeD< T >* Tree< T > :: getRoot() {
 */
 template < typename T >
 NodeTreeD< T >* Tree< T > :: father(NodeTreeD< T > *node) {
-   return this -> searchFather(node, root, root);
-}
-
-/*
-    EFECTO: devuelve el nodo padre de un nodo
-    REQUIERE: árbol creado y nodo válido
-    MODIFICA: no hace modificaciones
-*/
-template < typename T >
-NodeTreeD< T >* Tree< T > :: searchFather(NodeTreeD< T > *node, NodeTreeD< T > *actual, NodeTreeD< T > *actualFather) {
-    NodeTreeD< T > *temp = nullptr;
-      if(actual != node) {
-          actualFather = actual;
-        actual = actual -> getLeftmostSon();
-        while(actual && !temp) {
-          temp = searchFather(node, actual, actualFather);
-          actual = actual -> getRightBrother();
-        }
-      }
-      else
-        temp = actualFather;
-      return temp;
+   return node -> getFather();
 }
 
 /*

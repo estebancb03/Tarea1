@@ -7,7 +7,7 @@ class NodeTreeA {
     int position;
     int fatherPosition;
     public:
-        NodeTreeA(T o) { object = o; position = 0; fatherPosition = 0; };
+        NodeTreeA(T o, int p, int fp) { object = o; position = p; fatherPosition = fp; };
         T getObject() { return object; };
         int getposition() { return position; };
         int getFatherPosition() { return fatherPosition; };
