@@ -2,9 +2,11 @@
 #define GENERICTREEMETHODS_H
 #include "../Stack/Stack.h"
 #include "../Queue/Queue.h"
-#include "../Nodes/Tree1Node.h"
+#include "../src/Menus.h"
 using namespace std;
 
+template < class T >
+class Menus;
 template < class T >
 class GenericTreeMethods {
     Tree *tree;
