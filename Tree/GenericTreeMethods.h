@@ -5,7 +5,7 @@
 #include "../Nodes/Tree1Node.h"
 using namespace std;
 
-template <class T>
+template < class T >
 class GenericTreeMethods {
     Tree *tree;
     public:
