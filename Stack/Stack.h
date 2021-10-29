@@ -1,12 +1,12 @@
 #ifndef STACK_H
 #define STACK_H
-#include "Node.h"
 #include <sstream>
+#include "../Nodes/GenericNode.h"
 using namespace std;
 template < class T >
 
 class Stack {
-    Node< T > *head;
+    GenericNode< T > *head;
     public:
         void create();
         void destroy();
@@ -45,7 +45,7 @@ void Stack< T > :: destroy() {
 */
 template < typename T >
 void Stack< T > :: push(T element) {
-    Node< T > *temp = new Node< T >(element);
+    GenericNode< T > *temp = new GenericNode< T >(element);
     if(this -> empty()) {
         head = temp;
     }
@@ -63,7 +63,7 @@ void Stack< T > :: push(T element) {
 template <typename T>
 void Stack< T > :: clear() {
     if(!this -> empty()) {
-        Node< T > *temp = head;
+        GenericNode< T > *temp = head;
         while(head) {
             head = head -> getNext();
             temp = nullptr;
@@ -90,7 +90,7 @@ bool Stack< T > :: empty() {
 template < typename T >
 T Stack< T > :: pop() {
     if(!this -> empty()) {
-        Node< T > *temp = head;
+        GenericNode< T > *temp = head;
         T element = temp -> getObject();
         head = head -> getNext();
         delete temp;
@@ -122,7 +122,7 @@ template < typename T >
 void Stack< T > :: print() {
     if(!this -> empty()) {
         cout << "---------------------------" << endl;
-        Node< T > *temp = head;
+        GenericNode< T > *temp = head;
         while(temp != nullptr) {
             stringstream sstream; 
             sstream << temp -> getObject();
@@ -143,4 +143,4 @@ void Stack< T > :: print() {
         cout << "Pila vacia" << endl;
 }
 
-#endif
+#endif //STACK_H

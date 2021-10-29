@@ -1,36 +1,29 @@
 #ifndef TREEA_H
 #define TREEA_H
 #include <vector>
-
-class NodeTreeA {
-    public:
-        int object;
-        int position;
-        int fatherPosition;
-};
+#include "../Nodes/Tree1Node.h"
 
 template < class T >
-
 class Tree {
     int size;
     int nodesNumber;
-    vector< NodeTreeA* > tree;
+    vector< Node<T>* > tree;
     public:
         void create();
         void destroy();
         void clear();
         void setRoot(T tag);
-        void addSon(NodeTreeA *father, T sonTag);
-        void deleteLeaf(NodeTreeA *node);
-        void modifyTag(NodeTreeA *node, T newTag);
-        T tag(NodeTreeA *node);
-        NodeTreeA *father(NodeTreeA *node);
-        NodeTreeA *leftmostSon(NodeTreeA *node);
-        NodeTreeA *rightBrother(NodeTreeA *node);
-        NodeTreeA *getRoot();
-        NodeTreeA *search(NodeTreeA *newRoot, T tag);
+        void addSon(Node<T> *father, T sonTag);
+        void deleteLeaf(Node<T> *node);
+        void modifyTag(Node<T> *node, T newTag);
+        T tag(Node<T> *node);
+        Node<T> *father(Node<T> *node);
+        Node<T> *leftmostSon(Node<T> *node);
+        Node<T> *rightBrother(Node<T> *node);
+        Node<T> *getRoot();
+        Node<T> *search(Node<T> *newRoot, T tag);
         int numNodes();
-        int numSons(NodeTreeA *node);
+        int numSons(Node<T> *node);
         bool empty();
         bool exist(T tag);
 };
@@ -78,10 +71,7 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-    NodeTreeA* root = new NodeTreeA();
-    root -> object = tag;
-    root -> position = 0;
-    root -> fatherPosition = 0;
+    Node<T>* root = new Node<T>(tag, 0, -1);
     tree.push_back(root);
     nodesNumber++;
 }
@@ -92,11 +82,8 @@ void Tree< T > :: setRoot(T tag) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: addSon(NodeTreeA *father, T sonTag) {
-    NodeTreeA *temp = new NodeTreeA();
-    temp -> object = sonTag;
-    temp -> position = nodesNumber;
-    temp -> fatherPosition = father -> position;
+void Tree< T > :: addSon(Node<T> *father, T sonTag) {
+    Node<T> *temp = new Node<T>(sonTag, nodesNumber, father -> getPosition());
     tree[nodesNumber] = temp;
     nodesNumber++;
 }
@@ -107,8 +94,8 @@ void Tree< T > :: addSon(NodeTreeA *father, T sonTag) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: deleteLeaf(NodeTreeA *node) {
-    for(int i = node -> position + 1; i  < nodesNumber ; i++){
+void Tree< T > :: deleteLeaf(Node<T> *node) {
+    for(int i = node -> getFatherPosition() + 1; i  < nodesNumber ; i++){
         tree[i-1] = tree[i];
     }
     tree[nodesNumber] = nullptr;
@@ -121,8 +108,8 @@ void Tree< T > :: deleteLeaf(NodeTreeA *node) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: modifyTag(NodeTreeA *node, T newTag) {
-    node -> object = newTag;
+void Tree< T > :: modifyTag(Node<T> *node, T newTag) {
+    node -> setObject(newTag);
 }
 
 /*
@@ -131,7 +118,7 @@ void Tree< T > :: modifyTag(NodeTreeA *node, T newTag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeA* Tree< T > :: getRoot() {
+Node<T>* Tree< T > :: getRoot() {
     return this -> tree[0];
 }
 
@@ -141,8 +128,8 @@ NodeTreeA* Tree< T > :: getRoot() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeA* Tree< T > :: father(NodeTreeA *node) {
-    return tree[node -> fatherPosition];
+Node<T>* Tree< T > :: father(Node<T> *node) {
+    return tree[node -> getFatherPosition()];
 }
 
 /*
@@ -151,14 +138,14 @@ NodeTreeA* Tree< T > :: father(NodeTreeA *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeA* Tree< T > :: leftmostSon(NodeTreeA *node) {
-    int i = node -> position + 1;
+Node<T>* Tree< T > :: leftmostSon(Node<T> *node) {
+    int i = node -> getPosition() + 1;
     bool enabled = true;
     while(enabled) {
         if(i > size) 
             enabled = false;
         else {
-            if(tree[i] -> fatherPosition == node -> position)
+            if(tree[i] -> getFatherPosition() == node -> getPosition())
                 enabled = false;
             else
                 ++i;
@@ -173,14 +160,14 @@ NodeTreeA* Tree< T > :: leftmostSon(NodeTreeA *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeA* Tree< T > :: rightBrother(NodeTreeA *node) {
-    int i = node -> position + 1;
+Node<T>* Tree< T > :: rightBrother(Node<T> *node) {
+    int i = node -> getPosition() + 1;
     bool enabled = true;
     while(enabled) {
         if(i > size) 
             enabled = false;
         else {
-            if(tree[i] -> fatherPosition == node -> fatherPosition)
+            if(tree[i] -> getFatherPosition() == node -> getFatherPosition())
                 enabled = false;
             else
                 ++i;
@@ -205,11 +192,10 @@ int Tree< T > :: numNodes() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-int Tree< T > :: numSons(NodeTreeA *node) {
-    int position = node -> position;
+int Tree< T > :: numSons(Node<T> *node) {
     int result = 0;
-    for(int i = position + 1; i < nodesNumber; ++i) {
-        if(tree[i] -> fatherPosition == position)
+    for(int i = node -> getPosition() + 1; i < nodesNumber; ++i) {
+        if(tree[i] -> getFatherPosition() == node -> getPosition())
             ++result;
     }
     return result;
@@ -231,8 +217,8 @@ bool Tree< T > :: empty() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-T Tree< T > :: tag(NodeTreeA *node) {
-   return tree[node -> position] -> object;
+T Tree< T > :: tag(Node<T> *node) {
+   return tree[node -> getPosition()] -> getObject();
 }
 
 /*
@@ -249,7 +235,7 @@ bool Tree< T > :: exist(T tag) {
         if(i > nodesNumber) 
             enabled = false;
         else {
-            if(tree[i] -> object == tag) {
+            if(tree[i] -> getObject() == tag) {
                 result = true;
                 enabled = false;
             }
@@ -265,8 +251,8 @@ bool Tree< T > :: exist(T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeA* Tree< T > :: search(NodeTreeA *newRoot, T tag) {
-    NodeTreeA *temp = nullptr;
+Node<T>* Tree< T > :: search(Node<T> *newRoot, T tag) {
+    Node<T> *temp = nullptr;
     bool enabled = true;
     int i = 0;
     while(enabled) {
@@ -274,7 +260,7 @@ NodeTreeA* Tree< T > :: search(NodeTreeA *newRoot, T tag) {
         if(i >= size) 
             enabled = false;
         else {
-            if(temp -> object == tag) {
+            if(temp -> getObject() == tag) {
                 enabled = false;
             }
             ++i;
@@ -283,4 +269,4 @@ NodeTreeA* Tree< T > :: search(NodeTreeA *newRoot, T tag) {
     return temp;
 }
 
-#endif
+#endif //TREEA_H

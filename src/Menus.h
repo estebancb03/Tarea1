@@ -1,11 +1,11 @@
 #ifndef MENUS_H
 #define MENUS_H
-#include "Stack.h"
-#include "Queue.h"
-#include "TreeA.h"
-//#include "TreeC.h"
-//#include "TreeD.h"
-//#include "TreeE.h"
+#include "../Stack/Stack.h"
+#include "../Queue/Queue.h"
+#include "../Tree/TreeA.h"
+//#include "../Tree/TreeC.h"
+//#include "../Tree/TreeD.h"
+//#include "../Tree/TreeE.h"
 using namespace std;
 template <class T>
 

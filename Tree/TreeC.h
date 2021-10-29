@@ -1,29 +1,29 @@
-#ifndef TREEE_H
-#define TREEE_H
-#include "NodeTreeE.h"
-template < class T >
+#ifndef TREEC_H
+#define TREEC_H
+#include "../Nodes/Tree3Node.h"
 
+template < class T >
 class Tree {
     int nodesNumber;
-    NodeTreeE< T > *root;
+    Node< T > *root;
     public:
         void create();
         void destroy();
         void clear();
         void setRoot(T tag);
-        void addSon(NodeTreeE< T > *father, T sonTag);
-        void deleteLeaf(NodeTreeE< T > *node);
-        void modifyTag(NodeTreeE< T > *node, T newTag);
-        T tag(NodeTreeE< T > *node);
-        NodeTreeE< T > *father(NodeTreeE< T > *node);
-        NodeTreeE< T > *leftmostSon(NodeTreeE< T > *node);
-        NodeTreeE< T > *rightBrother(NodeTreeE< T > *node);
-        NodeTreeE< T > *getRoot();
-        NodeTreeE< T > *search(NodeTreeE< T > *newRoot, T tag);
-        NodeTreeE< T > *searchLeftBrother(NodeTreeE< T > *node, NodeTreeE< T > *actual);
-        NodeTreeE< T > *searchFather(NodeTreeE< T > *node, NodeTreeE< T > *actual, NodeTreeE< T > *actualFather);
+        void addSon(Node< T > *father, T sonTag);
+        void deleteLeaf(Node< T > *node);
+        void modifyTag(Node< T > *node, T newTag);
+        T tag(Node< T > *node);
+        Node< T > *father(Node< T > *node);
+        Node< T > *leftmostSon(Node< T > *node);
+        Node< T > *rightBrother(Node< T > *node);
+        Node< T > *getRoot();
+        Node< T > *search(Node< T > *newRoot, T tag);
+        Node< T > *searchLeftBrother(Node< T > *node, Node< T > *actual);
+        Node< T > *searchFather(Node< T > *node, Node< T > *actual, Node< T > *actualFather);
         int numNodes();
-        int numSons(NodeTreeE< T > *node);
+        int numSons(Node< T > *node);
         bool empty();
         bool exist(T tag);
 };
@@ -70,7 +70,7 @@ template < typename T >
 void Tree< T > :: setRoot(T tag) {
     if(this -> empty())
         nodesNumber++;
-    root = new NodeTreeE< T >(tag);
+    root = new Node< T >(tag);
 }
 
 /*
@@ -79,17 +79,14 @@ void Tree< T > :: setRoot(T tag) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: addSon(NodeTreeE< T > *father, T sonTag) {
-    if(!father -> getLeftmostSon()) {
-        father -> setLeftmostSon(new NodeTreeE< T >(sonTag));
-        father -> getLeftmostSon() -> setRightBrotherOrFather(father);
-    }
+void Tree< T > :: addSon(Node< T > *father, T sonTag) {
+    if(!father -> getLeftmostSon()) 
+        father -> setLeftmostSon(new Node< T >(sonTag));
     else{
-        NodeTreeE< T > *temp = father -> getLeftmostSon();
-        while(temp -> getRightBrotherOrFather() != father) 
-            temp = temp -> getRightBrotherOrFather();
-        temp -> setRightBrotherOrFather(new NodeTreeE< T >(sonTag));
-        temp -> getRightBrotherOrFather() -> setRightBrotherOrFather(father);
+        Node< T > *temp = father -> getLeftmostSon();
+        while(temp -> getRightBrother()) 
+            temp = temp -> getRightBrother();
+        temp -> setRightBrother(new Node< T >(sonTag));
     }
     nodesNumber++;
 }
@@ -100,20 +97,20 @@ void Tree< T > :: addSon(NodeTreeE< T > *father, T sonTag) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: deleteLeaf(NodeTreeE< T > *node) {
-    if (node -> getRightBrotherOrFather()) {
-        NodeTreeE< T > *left = this -> searchLeftBrother(node, root);
+void Tree< T > :: deleteLeaf(Node< T > *node) {
+    if (node -> getRightBrother()) {
+        Node< T > *left = this -> searchLeftBrother(node, root);
         if (left) {
-          left -> setRightBrotherOrFather(node -> getRightBrotherOrFather());
+          left -> setRightBrother(node -> getRightBrother());
           delete node;
         }
     } 
     else {
         if(searchLeftBrother(node, root)) {
-            searchLeftBrother(node, root) -> setRightBrotherOrFather(father(searchLeftBrother(node, root)));
+            searchLeftBrother(node, root) -> setRightBrother(nullptr);
         }
         else {
-            NodeTreeE< T > *father = searchFather(node, root, root);
+            Node< T > *father = searchFather(node, root, root);
             if(father) {
                 father -> setLeftmostSon(nullptr);
                 delete node;
@@ -131,7 +128,7 @@ void Tree< T > :: deleteLeaf(NodeTreeE< T > *node) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: modifyTag(NodeTreeE< T > *node, T newTag) {
+void Tree< T > :: modifyTag(Node< T > *node, T newTag) {
     node -> setObject(newTag);
 }
 
@@ -141,7 +138,7 @@ void Tree< T > :: modifyTag(NodeTreeE< T > *node, T newTag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeE< T >* Tree< T > :: getRoot() {
+Node< T >* Tree< T > :: getRoot() {
     return root;
 }
 
@@ -151,7 +148,7 @@ NodeTreeE< T >* Tree< T > :: getRoot() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeE< T >* Tree< T > :: father(NodeTreeE< T > *node) {
+Node< T >* Tree< T > :: father(Node< T > *node) {
    return this -> searchFather(node, root, root);
 }
 
@@ -161,14 +158,14 @@ NodeTreeE< T >* Tree< T > :: father(NodeTreeE< T > *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeE< T >* Tree< T > :: searchFather(NodeTreeE< T > *node, NodeTreeE< T > *actual, NodeTreeE< T > *actualFather) {
-    NodeTreeE< T > *temp = nullptr;
+Node< T >* Tree< T > :: searchFather(Node< T > *node, Node< T > *actual, Node< T > *actualFather) {
+    Node< T > *temp = nullptr;
       if(actual != node) {
           actualFather = actual;
         actual = actual -> getLeftmostSon();
         while(actual && !temp) {
           temp = searchFather(node, actual, actualFather);
-          actual = actual -> getRightBrotherOrFather();
+          actual = actual -> getRightBrother();
         }
       }
       else
@@ -182,7 +179,7 @@ NodeTreeE< T >* Tree< T > :: searchFather(NodeTreeE< T > *node, NodeTreeE< T > *
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeE< T >* Tree< T > :: leftmostSon(NodeTreeE< T > *node) {
+Node< T >* Tree< T > :: leftmostSon(Node< T > *node) {
     return node -> getLeftmostSon();
 }
 
@@ -192,8 +189,9 @@ NodeTreeE< T >* Tree< T > :: leftmostSon(NodeTreeE< T > *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeE< T >* Tree< T > :: rightBrother(NodeTreeE< T > *node) {
-    return node -> getRightBrotherOrFather();
+Node< T >* Tree< T > :: rightBrother(Node< T > *node) {
+    return node -> getRightBrother();
+    //return this -> searchLeftBrother(node, root);
 }
 
 /*
@@ -212,11 +210,11 @@ int Tree< T > :: numNodes() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-int Tree< T > :: numSons(NodeTreeE< T > *node) {
+int Tree< T > :: numSons(Node< T > *node) {
     int result = 0;
-    NodeTreeE< T > *temp = node -> getLeftmostSon();
+    Node< T > *temp = node -> getLeftmostSon();
     while(temp) {
-        temp = temp -> getRightBrotherOrFather();
+        temp = temp -> getRightBrother();
         result++;
     }
     return result;
@@ -238,7 +236,7 @@ bool Tree< T > :: empty() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-T Tree< T > :: tag(NodeTreeE< T > *node) {
+T Tree< T > :: tag(Node< T > *node) {
    return node -> getObject();
 }
 
@@ -249,7 +247,7 @@ T Tree< T > :: tag(NodeTreeE< T > *node) {
 */
 template < typename T >
 bool Tree< T > :: exist(T tag) {
-    NodeTreeE< T > *temp = this -> search(root,tag);
+    Node< T > *temp = this -> search(root,tag);
     return temp != nullptr ? true : false;
 }
 
@@ -259,8 +257,8 @@ bool Tree< T > :: exist(T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeE< T >* Tree< T > :: search(NodeTreeE< T > *newRoot, T tag) {
-    NodeTreeE< T > *temp = nullptr;
+Node< T >* Tree< T > :: search(Node< T > *newRoot, T tag) {
+    Node< T > *temp = nullptr;
     if(newRoot == nullptr)
         return nullptr;
     while(newRoot) {
@@ -271,7 +269,7 @@ NodeTreeE< T >* Tree< T > :: search(NodeTreeE< T > *newRoot, T tag) {
             if(temp)
                 return temp;
         }
-        newRoot = newRoot -> getRightBrotherOrFather();
+        newRoot = newRoot -> getRightBrother();
     }
     return temp;
 }
@@ -282,18 +280,18 @@ NodeTreeE< T >* Tree< T > :: search(NodeTreeE< T > *newRoot, T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-NodeTreeE< T >* Tree< T > :: searchLeftBrother(NodeTreeE< T > *node, NodeTreeE< T > *actual) {
-    NodeTreeE< T > *temp = nullptr;
-    if (actual -> getRightBrotherOrFather() == node)
+Node< T >* Tree< T > :: searchLeftBrother(Node< T > *node, Node< T > *actual) {
+    Node< T > *temp = nullptr;
+    if (actual -> getRightBrother() == node)
         temp = actual; 
     else {
         actual = actual -> getLeftmostSon();
         while (actual && !temp) {
             temp = searchLeftBrother(node, actual);
-            actual = actual -> getRightBrotherOrFather();
+            actual = actual -> getRightBrother();
         }
     }
     return temp;
 }
 
-#endif
+#endif //TREEC_H
