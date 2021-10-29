@@ -1,14 +1,15 @@
 #ifndef MENUS_H
 #define MENUS_H
-#include "../Stack/Stack.h"
-#include "../Queue/Queue.h"
 #include "../Tree/TreeA.h"
 //#include "../Tree/TreeC.h"
 //#include "../Tree/TreeD.h"
 //#include "../Tree/TreeE.h"
+#include "../Stack/Stack.h"
+#include "../Queue/Queue.h"
+#include "../Tree/GenericTreeMethods.h"
 using namespace std;
-template <class T>
 
+template <class T>
 class Menus {
     public:
         void principalMenu();
@@ -440,4 +441,4 @@ void Menus< T > :: treeMenu() {
 	}
 }
 
-#endif
+#endif //MENUS_H
