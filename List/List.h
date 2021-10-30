@@ -68,13 +68,20 @@ GenericNode< T >* List< T > :: getNodeByPosition(int position) {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: inserta un nodo al final de la lista
+    REQUIERE: lista creada
+    MODIFICA: lista
 */
 template < typename T >
 void List< T > :: insert(T object) {
-
+    GenericNode< T > *temp = head;
+    if(this -> empty())
+        head = new GenericNode< T >(object);
+    else {
+        while(temp -> getNext())
+            temp = temp -> getNext();
+        temp = temp -> setNext(new GenericNode< T >(object));
+    }
 }
 
 /*
