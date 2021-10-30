@@ -5,8 +5,9 @@
 template < class T >
 class List {
     GenericNode< T > *head;
+    int numNodes;
     public:
-        List() { head = nullptr; };
+        List() { head = nullptr; numNodes = 0; };
         bool exist(T object);
         bool empty();
         void destroy();
@@ -14,7 +15,7 @@ class List {
         void insert(T object);
         T getObject(GenericNode< T > *node);
         GenericNode< T > *searchNode(T object);
-        GenericNode< T > *searchNodeByPosition(int position);
+        GenericNode< T > *searchBefore(GenericNode< T > *node);
 };
 
 /*
@@ -44,47 +45,47 @@ bool List< T > :: exist(T object) {
 */
 template < typename T >
 bool List< T > :: empty() {
-    return !head ? true : false;
+    return numNodes == 0 ? true : false;
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve el objeto de un nodo
+    REQUIERE: lista creada
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 T List< T > :: getObject(GenericNode< T > *node) {
-
+    return node -> getObject();
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve un nodo con un objeto determinado en la lista
+    REQUIERE: lista creada
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 GenericNode< T >* List< T > :: searchNode(T object) {
     GenericNode< T > *temp = head;
     if(!this -> empty()) {
-        bool enabled = true;
-        while(temp && enabled) {
-            if(temp -> getObject() == object)
-                enabled = false; 
-            else
-                temp = temp -> getNext();
-        }
+        while(temp && temp -> getObject() != object) 
+            temp = temp -> getNext();
     }
     return temp;
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve el nodo anterior si hay
+    REQUIERE: lista creada
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
-GenericNode< T >* List< T > :: searchNodeByPosition(int position) {
-
+GenericNode< T >* List< T > :: searchBefore(GenericNode< T >* node) {
+    if(numNodes > 1) {
+        GenericNode< T > *temp = head;
+        while(temp -> getNext() && temp -> getNext() != node)
+            temp = temp -> getNext();
+    }
+    return temp;
 }
 
 /*
@@ -102,16 +103,28 @@ void List< T > :: insert(T object) {
             temp = temp -> getNext();
         temp = new GenericNode< T >(object);
     }
+    ++numNodes;
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: elimina un nodo de la lista
+    REQUIERE: lista creada
+    MODIFICA: lista
 */
 template < typename T >
 void List< T > :: deleteObject(GenericNode< T > *node) {
-
+    if(!this -> empty) {
+        if(!node -> getNext()) {
+            node = nullptr;
+            delete node;
+        }
+        else {
+            GenericNode< T > *temp = searchBefore(node);
+            temp -> setNext(node -> getNext());
+            node = nullptr;
+            delete node;
+        }
+    }
 }
 
 #endif //LIST_H
