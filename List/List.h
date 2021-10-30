@@ -28,13 +28,13 @@ void List< T > :: destroy() {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve true si la lista está vacía y false si no
+    REQUIERE: lista creada
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 bool List< T > :: empty() {
-
+    return !head ? true : false;
 }
 
 /*
