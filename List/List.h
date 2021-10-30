@@ -18,13 +18,13 @@ class List {
 };
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: elimina la lista
+    REQUIERE: lista creada 
+    MODIFICA: lista
 */
 template < typename T >
 void List< T > :: destroy() {
-
+    delete this;
 }
 
 /*
@@ -54,7 +54,7 @@ T List< T > :: getObject(GenericNode< T > *node) {
 */
 template < typename T >
 GenericNode< T >* List< T > :: getNode(T object) {
-    
+
 }
 
 /*
