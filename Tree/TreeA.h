@@ -2,7 +2,7 @@
 #define TREEA_H
 #include <vector>
 #include "../Nodes/Tree1Node.h"
-
+using namespace std;
 template < class T >
 class Tree {
     int size;

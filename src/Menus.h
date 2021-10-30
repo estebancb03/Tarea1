@@ -1,6 +1,7 @@
 #ifndef MENUS_H
 #define MENUS_H
 #include "../Tree/TreeA.h"
+//#include "../Tree/TreeB.h"
 //#include "../Tree/TreeC.h"
 //#include "../Tree/TreeD.h"
 //#include "../Tree/TreeE.h"
@@ -353,7 +354,10 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 9: {
 				system("cls");
-				cout << "Raiz: " << tree -> tag(tree -> getRoot()) << endl << endl;
+				if(!tree -> empty())
+					cout << "Raiz: " << tree -> tag(tree -> getRoot()) << endl << endl;
+				else
+					cout << "Raiz: nullptr" << endl << endl;
 				system("pause");
 			}	break;
 			case 10: {

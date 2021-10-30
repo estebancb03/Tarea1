@@ -1,15 +1,14 @@
 #ifndef GENERICTREEMETHODS_H
 #define GENERICTREEMETHODS_H
-#include "../Stack/Stack.h"
-#include "../Queue/Queue.h"
 #include "../src/Menus.h"
 using namespace std;
 
 template < class T >
 class Menus;
+
 template < class T >
 class GenericTreeMethods {
-    Tree *tree;
+    Tree< T > *tree;
     public:
         GenericTreeMethods();
         Node< T > *getLeftBrother();

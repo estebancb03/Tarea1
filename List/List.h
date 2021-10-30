@@ -15,6 +15,7 @@ class List {
         void insert(T object);
         T getObject(GenericNode< T > *node);
         GenericNode< T > *searchNode(T object);
+        GenericNode< T > *searchNodeByPosition(int position);
         GenericNode< T > *searchBefore(GenericNode< T > *node);
 };
 
@@ -74,6 +75,23 @@ GenericNode< T >* List< T > :: searchNode(T object) {
 }
 
 /*
+    EFECTO: devuelve un nodo de acuerdo a una posición
+    REQUIERE: lista creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+GenericNode< T >* List< T > :: searchNodeByPosition(int position) {
+    GenericNode< T > *temp = head;
+    /*if(!this -> empty()) {
+        while(position <= numNodes) {
+            temp = temp -> getNext();
+            ++numNodes;
+        } 
+    }*/
+    return temp;
+}
+
+/*
     EFECTO: devuelve el nodo anterior si hay
     REQUIERE: lista creada
     MODIFICA: no hace modificaciones
@@ -84,8 +102,10 @@ GenericNode< T >* List< T > :: searchBefore(GenericNode< T >* node) {
         GenericNode< T > *temp = head;
         while(temp -> getNext() && temp -> getNext() != node)
             temp = temp -> getNext();
+        return temp;
     }
-    return temp;
+    else
+        return nullptr;
 }
 
 /*

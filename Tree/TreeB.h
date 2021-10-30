@@ -1,25 +1,29 @@
 #ifndef TREEB_H
 #define TREEB_H
+#include "../List/List.h"
 #include "../Nodes/Tree2Node.h"
 
 template < class T >
 class Tree {
+    Node< T > *root;
+    int nodesNumber;
     public:
         void create();
         void destroy();
         void clear();
         void setRoot(T tag);
-        void addSon(Node<T> *father, T sonTag);
-        void deleteLeaf(Node<T> *node);
-        void modifyTag(Node<T> *node, T newTag);
-        T tag(Node<T> *node);
-        Node<T> *father(Node<T> *node);
-        Node<T> *leftmostSon(Node<T> *node);
-        Node<T> *rightBrother(Node<T> *node);
-        Node<T> *getRoot();
-        Node<T> *search(Node<T> *newRoot, T tag);
+        void addSon(GenericNode<T> *father, T sonTag);
+        void deleteLeaf(GenericNode<T> *node);
+        void modifyTag(GenericNode<T> *node, T newTag);
+        T tag(GenericNode<T> *node);
+        GenericNode<T> *father(GenericNode<T> *node);
+        GenericNode<T> *leftmostSon(GenericNode<T> *node);
+        GenericNode<T> *rightBrother(GenericNode<T> *node);
+        GenericNode<T> *getRoot();
+        GenericNode<T> *getList(T tag);
+        GenericNode<T> *search(GenericNode<T> *newRoot, T tag);
         int numNodes();
-        int numSons(Node<T> *node);
+        int numSons(GenericNode<T> *node);
         bool empty();
         bool exist(T tag);
 };
@@ -31,7 +35,8 @@ class Tree {
 */
 template < typename T >
 void Tree< T > :: create() {
-    
+    root = new Node< T >();
+    nodesNumber = 0;
 }
 
 /*
@@ -41,7 +46,7 @@ void Tree< T > :: create() {
 */
 template < typename T >
 void Tree< T > :: destroy() {
-    
+    delete root;
 }
 
 /*
@@ -51,7 +56,9 @@ void Tree< T > :: destroy() {
 */
 template < typename T >
 void Tree< T > :: clear() {
-    
+    this -> destroy();
+    this -> create();
+    nodesNumber = 0;
 }
 
 /*
@@ -61,7 +68,12 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-    
+    if(root -> getObject() -> searchNodeByPosition(0) == nullptr) {
+        root -> getObject() -> insert(tag);
+        ++nodesNumber;
+    }
+    else
+        root -> getObject() -> searchNodeByPosition(0) -> setObject(tag);
 }
 
 /*
@@ -70,8 +82,10 @@ void Tree< T > :: setRoot(T tag) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: addSon(Node<T> *father, T sonTag) {
-    
+void Tree< T > :: addSon(GenericNode<T> *father, T sonTag) {
+    if(numNodes == 0) {
+        
+    }
 }
 
 /*
@@ -80,7 +94,7 @@ void Tree< T > :: addSon(Node<T> *father, T sonTag) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: deleteLeaf(Node<T> *node) {
+void Tree< T > :: deleteLeaf(GenericNode<T> *node) {
     
 }
 
@@ -90,7 +104,7 @@ void Tree< T > :: deleteLeaf(Node<T> *node) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: modifyTag(Node<T> *node, T newTag) {
+void Tree< T > :: modifyTag(GenericNode<T> *node, T newTag) {
     
 }
 
@@ -100,8 +114,8 @@ void Tree< T > :: modifyTag(Node<T> *node, T newTag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node<T>* Tree< T > :: getRoot() {
-    
+GenericNode<T>* Tree< T > :: getRoot() {
+    return root -> getObject() -> searchNodeByPosition(0);
 }
 
 /*
@@ -110,7 +124,7 @@ Node<T>* Tree< T > :: getRoot() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node<T>* Tree< T > :: father(Node<T> *node) {
+GenericNode<T>* Tree< T > :: father(GenericNode<T> *node) {
     
 }
 
@@ -120,7 +134,7 @@ Node<T>* Tree< T > :: father(Node<T> *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node<T>* Tree< T > :: leftmostSon(Node<T> *node) {
+GenericNode<T>* Tree< T > :: leftmostSon(GenericNode<T> *node) {
     
 }
 
@@ -130,7 +144,7 @@ Node<T>* Tree< T > :: leftmostSon(Node<T> *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node<T>* Tree< T > :: rightBrother(Node<T> *node) {
+GenericNode<T>* Tree< T > :: rightBrother(GenericNode<T> *node) {
     
 }
 
@@ -141,7 +155,7 @@ Node<T>* Tree< T > :: rightBrother(Node<T> *node) {
 */
 template < typename T >
 int Tree< T > :: numNodes() {
-    
+    return nodesNumber;
 }
 
 /*
@@ -150,7 +164,7 @@ int Tree< T > :: numNodes() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-int Tree< T > :: numSons(Node<T> *node) {
+int Tree< T > :: numSons(GenericNode<T> *node) {
     
 }
 
@@ -161,7 +175,7 @@ int Tree< T > :: numSons(Node<T> *node) {
 */
 template < typename T >
 bool Tree< T > :: empty() {
-    
+    return nodesNumber == 0 ? true : false;
 }
 
 /*
@@ -170,8 +184,8 @@ bool Tree< T > :: empty() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-T Tree< T > :: tag(Node<T> *node) {
-   
+T Tree< T > :: tag(GenericNode<T> *node) {
+    node -> getObject();
 }
 
 /*
@@ -190,7 +204,7 @@ bool Tree< T > :: exist(T tag) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node<T>* Tree< T > :: search(Node<T> *newRoot, T tag) {
+GenericNode<T>* Tree< T > :: search(GenericNode<T> *newRoot, T tag) {
     
 }
 

@@ -3,12 +3,12 @@
 
 template < class T >
 class Node {
-    T object;
+    List< T > *object;
     Node< T > *father;
     public:
-        Node(T o) { object = o; next = nullptr; };
+        Node() { object = new List< T >(); father = nullptr; };
         Node< T > *getFather() { return father; };
-        T getObject() { return object; };
+        List< T > *getObject() { return object; };
         void setFather(Node< T > *f) { father = f; };
 };
 
