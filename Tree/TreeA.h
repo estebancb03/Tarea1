@@ -38,8 +38,6 @@ void Tree< T > :: create() {
     size = 10;
     nodesNumber = 0;
     tree.reserve(size);
-    for(int i = 0; i < size; ++i)
-        tree[i] = nullptr;
 }
 
 /*
@@ -60,7 +58,7 @@ void Tree< T > :: destroy() {
 template < typename T >
 void Tree< T > :: clear() {
     for(int i = 0; i < nodesNumber; ++i)
-        tree[i] = nullptr;
+        delete tree[i];
     nodesNumber = 0;
 }
 
@@ -83,9 +81,11 @@ void Tree< T > :: setRoot(T tag) {
 */
 template < typename T >
 void Tree< T > :: addSon(Node<T> *father, T sonTag) {
-    Node<T> *temp = new Node<T>(sonTag, nodesNumber, father -> getPosition());
-    tree[nodesNumber] = temp;
-    nodesNumber++;
+    if(nodesNumber < size) {
+        Node<T> *temp = new Node<T>(sonTag, nodesNumber, father -> getPosition());
+        tree[nodesNumber] = temp;
+        nodesNumber++;
+    }
 }
 
 /*
