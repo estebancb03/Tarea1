@@ -95,10 +95,12 @@ void Tree< T > :: addSon(Node<T> *father, T sonTag) {
 */
 template < typename T >
 void Tree< T > :: deleteLeaf(Node<T> *node) {
-    for(int i = node -> getFatherPosition() + 1; i  < nodesNumber ; i++){
-        tree[i-1] = tree[i];
+    if(node -> getPosition() != 0 && node -> getPosition() < nodesNumber - 1) {
+        for(int i = node -> getPosition(); i < nodesNumber - 1; ++i) 
+            tree[i] = tree[i + 1];
     }
-    tree[nodesNumber] = nullptr;
+    else 
+        delete tree[node -> getPosition()];
     --nodesNumber;
 }
 
@@ -129,7 +131,7 @@ Node<T>* Tree< T > :: getRoot() {
 */
 template < typename T >
 Node<T>* Tree< T > :: father(Node<T> *node) {
-    return tree[node -> getFatherPosition()];
+    return node ? tree[node -> getFatherPosition()] : nullptr;
 }
 
 /*
@@ -140,18 +142,21 @@ Node<T>* Tree< T > :: father(Node<T> *node) {
 template < typename T >
 Node<T>* Tree< T > :: leftmostSon(Node<T> *node) {
     int i = node -> getPosition() + 1;
+    Node< T > *temp = nullptr;
     bool enabled = true;
     while(enabled) {
-        if(i > size) 
+        if(i > nodesNumber)  
             enabled = false;
         else {
-            if(tree[i] -> getFatherPosition() == node -> getPosition())
+            if(tree[i] != nullptr && tree[i] -> getFatherPosition() == node -> getPosition()) {
+                temp = tree[i];
                 enabled = false;
+            }
             else
                 ++i;
         }
     }
-    return tree[i];
+    return temp;
 }
 
 /*
@@ -162,18 +167,21 @@ Node<T>* Tree< T > :: leftmostSon(Node<T> *node) {
 template < typename T >
 Node<T>* Tree< T > :: rightBrother(Node<T> *node) {
     int i = node -> getPosition() + 1;
+    Node< T > *temp = nullptr;
     bool enabled = true;
     while(enabled) {
-        if(i > size) 
+        if(i > nodesNumber) 
             enabled = false;
         else {
-            if(tree[i] -> getFatherPosition() == node -> getFatherPosition())
+            if(tree[i] != nullptr && tree[i] -> getFatherPosition() == node -> getFatherPosition()) {
+                temp = tree[i];
                 enabled = false;
+            }
             else
                 ++i;
         }
     }
-    return tree[i];
+    return temp;
 }
 
 /*
@@ -235,7 +243,7 @@ bool Tree< T > :: exist(T tag) {
         if(i > nodesNumber) 
             enabled = false;
         else {
-            if(tree[i] -> getObject() == tag) {
+            if(tree[i] != nullptr && tree[i] -> getObject() == tag) {
                 result = true;
                 enabled = false;
             }

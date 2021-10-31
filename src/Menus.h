@@ -354,7 +354,7 @@ void Menus< T > :: treeMenu() {
 			}	break;
 			case 9: {
 				system("cls");
-				if(!tree -> empty())
+				if(!tree -> empty() && tree -> getRoot())
 					cout << "Raiz: " << tree -> tag(tree -> getRoot()) << endl << endl;
 				else
 					cout << "Raiz: nullptr" << endl << endl;
