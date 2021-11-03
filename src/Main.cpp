@@ -3,6 +3,6 @@
 
 int main() {
 	Menus< int > *menu = new Menus< int >();
-	menu -> principalMenu();
+	menu -> treeMenu();
 	return 0;
 }

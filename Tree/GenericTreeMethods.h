@@ -11,7 +11,7 @@ class GenericTreeMethods {
     Tree< T > *tree;
     public:
         GenericTreeMethods(Tree< T > *t) { tree = t; };
-        Node< T > *getLeftBrother(Node< T > *node);
+        Node< T > *getLeftBrother(Node< T > *actual, Node< T > *node);
         Node< T > *searchTag(Node< T >* node, T tag);
         bool repeatedTags();
         int nodeHeight(T tag);
@@ -30,15 +30,15 @@ class GenericTreeMethods {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node< T >* GenericTreeMethods< T > :: getLeftBrother(Node< T > *node) {
+Node< T >* GenericTreeMethods< T > :: getLeftBrother(Node< T > *node, Node< T > *actual) {
     Node< T > *temp = nullptr;
-    if (actual -> getRightBrother() == node)
+    if (tree -> rightBrother(actual) == node)
         temp = actual; 
     else {
-        actual = actual -> getLeftmostSon();
+        actual = tree -> leftmostSon(actual);
         while (actual && !temp) {
             temp = getLeftBrother(node, actual);
-            actual = actual -> getRightBrother();
+            actual = tree -> rightBrother(actual);
         }
     }
     return temp;
@@ -57,12 +57,12 @@ Node< T >* GenericTreeMethods< T > :: searchTag(Node< T >* node, T tag) {
     while(node) {
         if(node -> getObject() == tag)
             return node;
-        if(node -> getLeftmostSon()) {
-            temp = search(node -> getLeftmostSon(), tag);
+        if(tree -> leftmostSon(node)) {
+            temp = searchTag(tree -> leftmostSon(node), tag);
             if(temp)
                 return temp;
         }
-        newRoot = newRoot -> getRightBrother();
+        node = tree -> rightBrother(node);
     }
     return temp;
 }
