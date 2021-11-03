@@ -3,6 +3,7 @@
 #include <vector>
 #include "../Nodes/Tree1Node.h"
 using namespace std;
+
 template < class T >
 class Tree {
     int size;
@@ -21,11 +22,10 @@ class Tree {
         Node<T> *leftmostSon(Node<T> *node);
         Node<T> *rightBrother(Node<T> *node);
         Node<T> *getRoot();
-        Node<T> *search(Node<T> *newRoot, T tag);
         int numNodes();
         int numSons(Node<T> *node);
         bool empty();
-        bool exist(T tag);
+        bool exist(Node< T > *newRoot, T tag);
 };
 
 /*
@@ -235,46 +235,21 @@ T Tree< T > :: tag(Node<T> *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-bool Tree< T > :: exist(T tag) {
-    bool enabled = true;
+bool Tree< T > :: exist(Node< T > *newRoot, T tag) {
     bool result = false;
-    int i = 0;
-    while(enabled) {
-        if(i > nodesNumber) 
-            enabled = false;
-        else {
-            if(tree[i] != nullptr && tree[i] -> getObject() == tag) {
-                result = true;
-                enabled = false;
-            }
-            ++i;
+    if(newRoot == nullptr)
+        return result;
+    while(newRoot) {
+        if(newRoot -> getObject() == tag)
+            result = true;
+        if(this -> leftmostSon(newRoot)) {
+            result = exist(this -> leftmostSon(newRoot), tag);
+            if(result == true)
+                return result;
         }
+        newRoot = this -> rightBrother(newRoot);
     }
     return result;
-}
-
-/*
-    EFECTO: devuelve el nodo que contiene deteerminada etiqueta
-    REQUIERE: arbol creado
-    MODIFICA: no hace modificaciones
-*/
-template < typename T >
-Node<T>* Tree< T > :: search(Node<T> *newRoot, T tag) {
-    Node<T> *temp = nullptr;
-    bool enabled = true;
-    int i = 0;
-    while(enabled) {
-        temp = tree[i];
-        if(i >= size) 
-            enabled = false;
-        else {
-            if(temp -> getObject() == tag) {
-                enabled = false;
-            }
-            ++i;
-        }
-    }
-    return temp;
 }
 
 #endif //TREEA_H

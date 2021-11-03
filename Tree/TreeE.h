@@ -19,13 +19,12 @@ class Tree {
         Node< T > *leftmostSon(Node< T > *node);
         Node< T > *rightBrother(Node< T > *node);
         Node< T > *getRoot();
-        Node< T > *search(Node< T > *newRoot, T tag);
         Node< T > *searchLeftBrother(Node< T > *node, Node< T > *actual);
         Node< T > *searchFather(Node< T > *node, Node< T > *actual, Node< T > *actualFather);
         int numNodes();
         int numSons(Node< T > *node);
         bool empty();
-        bool exist(T tag);
+        bool exist(Node< T > *newRoot, T tag);
 };
 
 /*
@@ -248,32 +247,21 @@ T Tree< T > :: tag(Node< T > *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-bool Tree< T > :: exist(T tag) {
-    Node< T > *temp = this -> search(root,tag);
-    return temp != nullptr ? true : false;
-}
-
-/*
-    EFECTO: devuelve el nodo que contiene deteerminada etiqueta
-    REQUIERE: arbol creado
-    MODIFICA: no hace modificaciones
-*/
-template < typename T >
-Node< T >* Tree< T > :: search(Node< T > *newRoot, T tag) {
-    Node< T > *temp = nullptr;
+bool Tree< T > :: exist(Node< T > *newRoot, T tag) {
+    bool result = false;
     if(newRoot == nullptr)
-        return nullptr;
+        return result;
     while(newRoot) {
         if(newRoot -> getObject() == tag)
-            return newRoot;
+            result = true;
         if(newRoot -> getLeftmostSon()) {
-            temp = search(newRoot -> getLeftmostSon(), tag);
-            if(temp)
-                return temp;
+            result = exist(newRoot -> getLeftmostSon(), tag);
+            if(result == true)
+                return result;
         }
         newRoot = newRoot -> getRightBrother();
     }
-    return temp;
+    return result;
 }
 
 /*
