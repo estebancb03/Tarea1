@@ -13,10 +13,9 @@ using namespace std;
 template <class T>
 class Menus {
     public:
-        void principalMenu();
-		void queueMenu();
-        void stackMenu();
 		void treeMenu();
+        void principalMenu();
+		void genericTreeMethodsMenu();
 };
 
 /*
@@ -31,219 +30,21 @@ void Menus< T > :: principalMenu() {
 	while(enabled) {
 		system("cls");
 		cout << "M E N U  D E  O P C I O N E S" << endl << endl;
-		cout << "1. Cola" << endl;
-		cout << "2. Pila" << endl;
-		cout << "3. Arbol n-ario" << endl;
-		cout << "4. Salir" << endl << endl;
+		cout << "1. Arbol n-ario" << endl;
+		cout << "2. Metodos genericos (Etapa 3)" << endl;
+		cout << "3. Salir" << endl << endl;
 		cout << "Opcion: "; cin >> option;
 		switch (option) {
-			case 1:
-				queueMenu();
-			break;
-			case 2:
-				stackMenu();
-			break;
-			case 3:
-				treeMenu();
-			break;
-			case 4:
-				enabled = false;
-			break;
+			case 1: this -> treeMenu(); break;
+			case 2: this -> genericTreeMethodsMenu(); break;
+			case 3: enabled = false; break;
 		}
 	}
 }
 
 /*
-	EFECTO: maneja el uso de los métodos de la clase Queue
-	REQUIERE: no tiene requerimientos
-	MODIFICACIONES: varias modificaciones sobre la cola de acuerdo a las opciones elegidas
-*/
-template < typename T >
-void Menus< T > :: queueMenu() {
-	bool enabled = true;
-	int option = 0;
-	Queue< T > *cola;
-	while(enabled) {
-		system("cls");
-		cout << "M E N U  D E  O P C I O N E S  D E  C O L A" << endl << endl;
-		cout << "1. Crear" << endl;
-		cout << "2. Destruir" << endl;
-		cout << "3. Vaciar" << endl;
-		cout << "4. Vacia?" << endl;
-		cout << "5. Agregar" << endl;
-		cout << "6. Sacar" << endl;
-		cout << "7. Frente?" << endl;
-		cout << "8. Visualizar" << endl;
-		cout << "9. Salir" << endl << endl;
-		cout << "Opcion: "; cin >> option;
-		switch(option) {
-			case 1: {
-				system("cls");
-				cola = new Queue< T >();
-				cola -> create();
-				cout << "Cola creada correctamente" << endl << endl;
-				system("pause");
-			}	break;
-			case 2: {
-				system("cls");
-				cola -> destroy();
-				cout << "Cola destruida correctamente" << endl << endl;
-				system("pause");
-			}	break;
-			case 3: {
-				system("cls");
-				cola -> clear();
-				cout << "Cola vaciada correctamente" << endl << endl;
-				system("pause");
-			}	break;
-			case 4: {
-				system("cls");
-				if(cola -> empty()) 
-					cout << "Estado de la cola: vacio";
-				else
-					cout << "Estado de la cola: no vacio";
-				cout << endl << endl;
-				system("pause");
-			}	break;
-			case 5: {
-				system("cls");
-				T element;
-				cout << "Elemento: "; cin >> element;
-				if(cola -> add(element))
-					cout << "Elemento introducido correctamente" << endl << endl;
-				else
-					cout << "Error: cola llena" << endl << endl;
-				system("pause");
-			}	break;
-			case 6: {
-				system("cls");
-				T element = cola -> pop();
-				if(element != -1) {
-					cout << "Elemento sacado correctamente" << endl;
-					cout << "Elemento sacado: " << element << endl << endl;
-				}
-				else
-					cout << "Error: cola vacia, no hay elementos que sacar " << endl << endl;
-				system("pause");
-			}	break;
-			case 7: {
-				system("cls");
-				T element = cola -> top();
-				if(element != -1)
-					cout << "Elemento del frente: " << element << endl << endl;
-				else
-					cout << "Error: cola vacia, no existe elemento en el frente" << endl << endl;
-				system("pause");
-			}	break;
-			case 8: {
-				system("cls");
-				cola -> print();
-				cout << endl;
-				system("pause");
-			}	break;
-			case 9: {
-				enabled = false;
-			}	break;
-		}
-	}
-}
-
-/*
-	EFECTO: maneja el uso de los métodos de la clase Pipe
-	REQUIERE: no tiene requerimientos
-	MODIFICACIONES: varias modificaciones sobre la pila de acuerdo a las opciones elegidas
-*/
-template < typename T >
-void Menus< T > :: stackMenu() {
-	bool enabled = true;
-	int option = 0;
-	Stack< T > *pila;
-	while(enabled) {
-		system("cls");
-		cout << "M E N U  D E  O P C I O N E S  D E  P I L A" << endl << endl;
-		cout << "1. Crear" << endl;
-		cout << "2. Destruir" << endl;
-		cout << "3. Vaciar" << endl;
-		cout << "4. Vacia?" << endl;
-		cout << "5. Poner" << endl;
-		cout << "6. Quitar" << endl;
-		cout << "7. Frente?" << endl;
-		cout << "8. Visualizar" << endl;
-		cout << "9. Salir" << endl << endl;
-		cout << "Opcion: "; cin >> option;
-		switch(option) {
-			case 1: {
-				system("cls");
-				pila = new Stack< T >();
-				pila -> create();
-				cout << "Pila creada correctamente" << endl << endl;
-				system("pause");
-			}	break;
-			case 2: {
-				system("cls");
-				pila -> destroy();
-				cout << "Pila destruida correctamente" << endl << endl;
-				system("pause");
-			}	break;
-			case 3: {
-				system("cls");
-				pila -> clear();
-				cout << "Pila vaciada correctamente" << endl << endl;
-				system("pause");
-			}	break;
-			case 4: {
-				system("cls");
-				if(pila -> empty()) 
-					cout << "Estado de la pila: vacio";
-				else
-					cout << "Estado de la pila: no vacio";
-				cout << endl << endl;
-				system("pause");
-			}	break;
-			case 5: {
-				system("cls");
-				T element;
-				cout << "Elemento: "; cin >> element;
-				pila -> push(element);
-				cout << "Elemento introducido correctamente" << endl << endl;
-				system("pause");
-			}	break;
-			case 6: {
-				system("cls");
-				T element = pila -> pop();
-				if(element != -1) {
-					cout << "Elemento sacado correctamente" << endl;
-					cout << "Elemento sacado: " << element << endl << endl;
-				}
-				else
-					cout << "Error: pila vacia, no hay elementos que sacar " << endl << endl;
-				system("pause");
-			}	break;
-			case 7: {
-				system("cls");
-				T element = pila -> top();
-				if(element != -1)
-					cout << "Elemento del frente: " << element << endl << endl;
-				else
-					cout << "Error: pila vacia, no existe elemento en el frente" << endl << endl;
-				system("pause");
-			}	break;
-			case 8: {
-				system("cls");
-				pila -> print();
-				cout << endl;
-				system("pause");
-			}	break;
-			case 9: {
-				enabled = false;
-			}	break;
-		}
-	}
-}
-
-/*
-	EFECTO: maneja el uso de los métodos de la clase Tree
-	REQUIERE: no tiene requerimientos
+	EFECTO: maneja el uso de los métodos genericos para arboles Tree
+	REQUIERE: arbol creado
 	MODIFICACIONES: varias modificaciones en el árbol de acuerdo a las opciones elegidas
 */
 template < typename T >
@@ -251,6 +52,7 @@ void Menus< T > :: treeMenu() {
 	bool enabled = true;
 	int option = 0;
 	Tree< T > *tree;
+	GenericTreeMethods< T > *genericTreeMethods;
 	while(enabled) {
 		system("cls");
 		cout << "M E N U  D E  O P C I O N E S  D E  A R B O L  N - A R I O" << endl << endl;
@@ -277,6 +79,7 @@ void Menus< T > :: treeMenu() {
 				system("cls");
 				tree = new Tree< T >();
 				tree -> create();
+				genericTreeMethods = new GenericTreeMethods< T >(tree);
 				cout << "Arbol creado correctamente" << endl << endl;
 				system("pause");
 			}	break;
@@ -441,6 +244,93 @@ void Menus< T > :: treeMenu() {
 			case 17: {
 				enabled = false;
 			}	break;
+		}
+	}
+}
+
+/*
+	EFECTO: maneja el uso de los métodos de la clase Tree
+	REQUIERE: no tiene requerimientos
+	MODIFICACIONES: varias modificaciones en el árbol de acuerdo a las opciones elegidas
+*/
+template < typename T >
+void Menus< T > :: genericTreeMethodsMenu() {
+	bool enabled = true;
+	int option = 0;
+	Tree< T > *tree;
+	while(enabled) {
+		system("cls");
+		cout << "M E N U  D E  O P C I O N E S  D E  M E T O D O S  G E N E R I C O S " << endl << endl;
+		cout << "1. Buscar hermano izquierdo" << endl;
+		cout << "2. Etiquetas repetidas" << endl;
+		cout << "3. Altura de un nodo" << endl;
+		cout << "4. Profundidad de un nodo" << endl;
+		cout << "5. Cantidad de niveles usando recorrido Pre-Orden" << endl;
+		cout << "6. Cantidad de niveles usando recorrido por niveles" << endl;
+		cout << "7. Listar etiquetas del iesimo nivel" << endl;
+		cout << "8. Listar etiquetas en Pre-Orden usando recursividad del compilador" << endl;
+		cout << "9. Listar etiquetas en Pre-Orden usando recursividad simulada con Pila" << endl;
+		cout << "10. Listar etiquetas por niveles" << endl;
+		cout << "11. Buscar una etiqueta" << endl;
+		cout << "12. Salir" << endl << endl;
+		cout << "Opcion: "; cin >> option;
+		switch(option) {
+			case 1: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 2: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 3: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 4: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 5: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 6: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 7: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 8: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 9: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 10: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 11: {
+				system("cls");
+				
+				system("pause");
+			}	break;
+			case 12: enabled = false; break;
 		}
 	}
 }

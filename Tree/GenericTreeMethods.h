@@ -10,7 +10,7 @@ template < class T >
 class GenericTreeMethods {
     Tree< T > *tree;
     public:
-        GenericTreeMethods(Tree t) { tree = t; };
+        GenericTreeMethods(Tree< T > *t) { tree = t; };
         Node< T > *getLeftBrother(Node< T > *node);
         Node< T > *searchTag(Node< T >* node, T tag);
         bool repeatedTags();
