@@ -37,7 +37,7 @@ Node< T >* GenericTreeMethods< T > :: getLeftBrother(Node< T > *node) {
     else {
         actual = actual -> getLeftmostSon();
         while (actual && !temp) {
-            temp = searchLeftBrother(node, actual);
+            temp = getLeftBrother(node, actual);
             actual = actual -> getRightBrother();
         }
     }
@@ -45,13 +45,26 @@ Node< T >* GenericTreeMethods< T > :: getLeftBrother(Node< T > *node) {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve el nodo hermano izquierdo
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 Node< T >* GenericTreeMethods< T > :: searchTag(Node< T >* node, T tag) {
-
+    Node< T > *temp = nullptr;
+    if(node == nullptr)
+        return nullptr;
+    while(node) {
+        if(node -> getObject() == tag)
+            return node;
+        if(node -> getLeftmostSon()) {
+            temp = search(node -> getLeftmostSon(), tag);
+            if(temp)
+                return temp;
+        }
+        newRoot = newRoot -> getRightBrother();
+    }
+    return temp;
 }
 
 /*
