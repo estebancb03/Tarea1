@@ -25,13 +25,23 @@ class GenericTreeMethods {
 };
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve el nodo hermano izquierdo
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 Node< T >* GenericTreeMethods< T > :: getLeftBrother(Node< T > *node) {
-
+    Node< T > *temp = nullptr;
+    if (actual -> getRightBrother() == node)
+        temp = actual; 
+    else {
+        actual = actual -> getLeftmostSon();
+        while (actual && !temp) {
+            temp = searchLeftBrother(node, actual);
+            actual = actual -> getRightBrother();
+        }
+    }
+    return temp;
 }
 
 /*
