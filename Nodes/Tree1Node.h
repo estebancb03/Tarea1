@@ -3,10 +3,10 @@
 
 template < class T >
 class Node {
+    T object;
+    int position;
+    int fatherPosition;
     public:
-        T object;
-        int position;
-        int fatherPosition;
         Node(T o, int p, int fp) { object = o; position = p; fatherPosition = fp; };
         T getObject() { return object; };
         int getPosition() { return position; };

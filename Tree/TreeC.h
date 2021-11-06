@@ -60,7 +60,7 @@ void Tree< T > :: clear() {
 }
 
 /*
-    EFECTO: pone el nod raíz del árbol
+    EFECTO: pone el nodo raíz del árbol
     REQUIERE: árbol creado
     MODIFICA: árbol
 */

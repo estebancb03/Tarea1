@@ -81,15 +81,14 @@ void Tree< T > :: addSon(Node< T > *father, T sonTag) {
     Node< T > *aux = new Node< T >(sonTag);
     if(!father -> getLeftmostSon()) {
         father -> setLeftmostSon(aux);
-        aux -> setFather(father);
-        //aux -> setRightBrother(this -> father(aux));
+        aux -> setRightBrother(father);
     }
     else {
         Node< T > *temp = father -> getLeftmostSon();
         father -> setLeftmostSon(aux);
         aux -> setRightBrother(temp);
-        aux -> setFather(father);
     }
+    aux -> setFather(father);
     nodesNumber++;
 }
 

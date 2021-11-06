@@ -1,10 +1,10 @@
 #ifndef MENUS_H
 #define MENUS_H
 //#include "../Tree/TreeA.h"
-//#include "../Tree/TreeB.h"
+#include "../Tree/TreeB.h"
 //#include "../Tree/TreeC.h"
 //#include "../Tree/TreeD.h"
-#include "../Tree/TreeE.h"
+//#include "../Tree/TreeE.h"
 #include "../Stack/Stack.h"
 #include "../Queue/Queue.h"
 #include "../Tree/GenericTreeMethods.h"

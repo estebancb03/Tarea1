@@ -3,13 +3,20 @@
 
 template < class T >
 class Node {
-    List< T > *object;
-    Node< T > *father;
+    T object;
+	Node< Node< T >* > *son;
+	Node *next;
     public:
-        Node() { object = new List< T >(); father = nullptr; };
-        Node< T > *getFather() { return father; };
-        List< T > *getObject() { return object; };
-        void setFather(Node< T > *f) { father = f; };
+        Node() {};
+        Node(T o) { object = o; next = nullptr; son = nullptr; };
+        Node(T o, Node* n) { object = o; next = n; son = nullptr; };
+        T getObject() { return object; };
+        Node* getNext() { return next; };
+        Node< Node< T >* > *getSon() { return son; };
+        void setObject(T o) { object = o; };
+        void setNext(Node *n) { next = n; };
+        void setSon(Node< Node< T >* > *s) { son = s; };
+
 };
 
 #endif // TREE2NODE_H
