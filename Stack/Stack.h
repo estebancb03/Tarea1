@@ -46,9 +46,8 @@ void Stack< T > :: destroy() {
 template < typename T >
 void Stack< T > :: push(T element) {
     GenericNode< T > *temp = new GenericNode< T >(element);
-    if(this -> empty()) {
+    if(this -> empty()) 
         head = temp;
-    }
     else {
         temp -> setNext(head);
         head = temp;
@@ -62,14 +61,8 @@ void Stack< T > :: push(T element) {
 */
 template <typename T>
 void Stack< T > :: clear() {
-    if(!this -> empty()) {
-        GenericNode< T > *temp = head;
-        while(head) {
-            head = head -> getNext();
-            temp = nullptr;
-            delete temp;
-        }
-    }
+    this -> destroy();
+    this -> create();
 }
 
 /*
@@ -96,8 +89,6 @@ T Stack< T > :: pop() {
         delete temp;
         return element;
     }
-    else 
-        return -1;
 }
 
 /*
@@ -109,8 +100,6 @@ template < typename T >
 T Stack< T > :: top() {
     if(!this -> empty())
         return head -> getObject();
-    else
-        return -1;
 }
 
 /*

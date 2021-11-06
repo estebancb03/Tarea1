@@ -22,7 +22,6 @@ class Tree {
         int numNodes();
         int numSons(Node< T > *node);
         bool empty();
-        bool exist(Node< T > *newRoot, T tag);
 };
 
 /*
@@ -84,12 +83,10 @@ void Tree< T > :: addSon(Node< T > *father, T sonTag) {
     }
     else{
         Node< T > *temp = father -> getLeftmostSon();
-        while(temp -> getRightBrother()) 
-            temp = temp -> getRightBrother();
-        temp -> setRightBrother(new Node< T >(sonTag));
-        aux = temp -> getRightBrother();
+        father -> setLeftmostSon(aux);
         aux -> setFather(father);
-        aux -> setLeftBrother(temp);
+        aux -> setRightBrother(temp);
+        temp -> setLeftBrother(aux);
     }
     nodesNumber++;
 }
@@ -219,29 +216,6 @@ bool Tree< T > :: empty() {
 template < typename T >
 T Tree< T > :: tag(Node< T > *node) {
    return node -> getObject();
-}
-
-/*
-    EFECTO: devuelve un verdadero si el nodo existe, si no devuelve falso
-    REQUIERE: arbol creado
-    MODIFICA: no hace modificaciones
-*/
-template < typename T >
-bool Tree< T > :: exist(Node< T > *newRoot, T tag) {
-    bool result = false;
-    if(newRoot == nullptr)
-        return result;
-    while(newRoot) {
-        if(newRoot -> getObject() == tag)
-            result = true;
-        if(newRoot -> getLeftmostSon()) {
-            result = exist(newRoot -> getLeftmostSon(), tag);
-            if(result == true)
-                return result;
-        }
-        newRoot = newRoot -> getRightBrother();
-    }
-    return result;
 }
 
 #endif //TREED_H

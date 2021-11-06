@@ -4,9 +4,6 @@
 using namespace std;
 
 template < class T >
-class Menus;
-
-template < class T >
 class GenericTreeMethods {
     Tree< T > *tree;
     public:

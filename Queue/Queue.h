@@ -31,9 +31,6 @@ void Queue< T > :: create() {
     array = new T[size];
     first = -1;
     last = -1; 
-    for(int i = 0; i < size; ++i) {
-        array[i] = 0;
-    }
 }
 
 /*
@@ -53,11 +50,8 @@ void Queue< T > :: destroy() {
 */
 template < typename T >
 void Queue< T > :: clear() {
-    if(!this -> empty()) {
-        for(int i = 0; i < size; ++i) {
-            array[i] = 0;
-        } 
-    }
+    this -> destroy();
+    this -> create();
     first = -1;
     last = -1;
 }
@@ -141,8 +135,6 @@ T Queue< T > :: pop() {
             ++first;
         return temp;
     }
-    else
-        return -1;
 }
 
 /*
@@ -154,8 +146,6 @@ template < typename T >
 T Queue< T > :: top() {
     if(!this -> empty())
         return array[first];
-    else
-        return -1;
 }
 
 /*

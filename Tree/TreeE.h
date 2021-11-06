@@ -24,7 +24,6 @@ class Tree {
         int numNodes();
         int numSons(Node< T > *node);
         bool empty();
-        bool exist(Node< T > *newRoot, T tag);
 };
 
 /*
@@ -79,16 +78,17 @@ void Tree< T > :: setRoot(T tag) {
 */
 template < typename T >
 void Tree< T > :: addSon(Node< T > *father, T sonTag) {
+    Node< T > *aux = new Node< T >(sonTag);
     if(!father -> getLeftmostSon()) {
-        father -> setLeftmostSon(new Node< T >(sonTag));
-        father -> getLeftmostSon() -> setRightBrother(father);
+        father -> setLeftmostSon(aux);
+        aux -> setFather(father);
+        //aux -> setRightBrother(this -> father(aux));
     }
-    else{
+    else {
         Node< T > *temp = father -> getLeftmostSon();
-        while(temp -> getRightBrother() != father) 
-            temp = temp -> getRightBrother();
-        temp -> setRightBrother(new Node< T >(sonTag));
-        temp -> getRightBrother() -> setRightBrother(father);
+        father -> setLeftmostSon(aux);
+        aux -> setRightBrother(temp);
+        aux -> setFather(father);
     }
     nodesNumber++;
 }
@@ -239,29 +239,6 @@ bool Tree< T > :: empty() {
 template < typename T >
 T Tree< T > :: tag(Node< T > *node) {
    return node -> getObject();
-}
-
-/*
-    EFECTO: devuelve un verdadero si el nodo existe, si no devuelve falso
-    REQUIERE: arbol creado
-    MODIFICA: no hace modificaciones
-*/
-template < typename T >
-bool Tree< T > :: exist(Node< T > *newRoot, T tag) {
-    bool result = false;
-    if(newRoot == nullptr)
-        return result;
-    while(newRoot) {
-        if(newRoot -> getObject() == tag)
-            result = true;
-        if(newRoot -> getLeftmostSon()) {
-            result = exist(newRoot -> getLeftmostSon(), tag);
-            if(result == true)
-                return result;
-        }
-        newRoot = newRoot -> getRightBrother();
-    }
-    return result;
 }
 
 /*

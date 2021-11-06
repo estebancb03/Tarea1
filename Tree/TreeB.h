@@ -21,11 +21,9 @@ class Tree {
         GenericNode<T> *rightBrother(GenericNode<T> *node);
         GenericNode<T> *getRoot();
         GenericNode<T> *getList(T tag);
-        GenericNode<T> *search(GenericNode<T> *newRoot, T tag);
         int numNodes();
         int numSons(GenericNode<T> *node);
         bool empty();
-        bool exist(T tag);
 };
 
 /*
@@ -186,26 +184,6 @@ bool Tree< T > :: empty() {
 template < typename T >
 T Tree< T > :: tag(GenericNode<T> *node) {
     node -> getObject();
-}
-
-/*
-    EFECTO: devuelve un verdadero si el nodo existe, si no devuelve falso
-    REQUIERE: arbol creado
-    MODIFICA: no hace modificaciones
-*/
-template < typename T >
-bool Tree< T > :: exist(T tag) {
-    
-}
-
-/*
-    EFECTO: devuelve el nodo que contiene deteerminada etiqueta
-    REQUIERE: arbol creado
-    MODIFICA: no hace modificaciones
-*/
-template < typename T >
-GenericNode<T>* Tree< T > :: search(GenericNode<T> *newRoot, T tag) {
-    
 }
 
 #endif //TREEB_H

@@ -2,7 +2,7 @@
 #include "Menus.h"
 
 int main() {
-	Menus< int > *menu = new Menus< int >();
+	Menus< string > *menu = new Menus< string >();
 	menu -> treeMenu();
 	return 0;
 }

@@ -103,9 +103,9 @@ void Menus< T > :: treeMenu() {
 				T fatherTag;
 				cout << "Nodo padre: "; cin >> fatherTag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, fatherTag)) {
+				Node< T > *father = genericTreeMethods -> searchTag(root, fatherTag);
+				if(father) {
 					T sonTag;
-					Node< T > *father = genericTreeMethods -> searchTag(root,fatherTag);
 					cout << "Nodo hijo: "; cin >> sonTag;
 					tree -> addSon(father, sonTag);
 					cout << "Hijo agregado correctamente" << endl << endl;
@@ -119,8 +119,8 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
-					Node< T > *toDelete = genericTreeMethods -> searchTag(root, tag);
+				Node< T > *toDelete = genericTreeMethods -> searchTag(root, tag);
+				if(toDelete) {
 					tree -> deleteLeaf(toDelete);
 					cout << "Hoja borrada correctamente" << endl << endl;
 				}
@@ -133,9 +133,9 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
+				Node< T > *toModify = genericTreeMethods -> searchTag(root, tag);
+				if(toModify) {
 					T newTag;
-					Node< T > *toModify = genericTreeMethods -> searchTag(root, tag); 
 					cout << "Nueva etiqueta: "; cin >> newTag;
 					tree -> modifyTag(toModify, newTag);
 					cout << "Nodo modificado correctamente" << endl << endl;
@@ -158,8 +158,8 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
-					Node< T > *son = genericTreeMethods -> searchTag(root,tag);
+				Node< T > *son = genericTreeMethods -> searchTag(root, tag);
+				if(son) {
 					Node< T > *father = tree -> father(son);
 					if(father && father != son)
 						cout << "Padre: " << tree -> tag(father) << endl << endl;
@@ -175,10 +175,10 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
-					Node< T > *father = genericTreeMethods -> searchTag(root, tag);
+				Node< T > *father = genericTreeMethods -> searchTag(root, tag);
+				if(father) {
 					Node< T > *leftmostSon = tree -> leftmostSon(father);
-					if(father)
+					if(leftmostSon)
 						cout << "Hijo mas izquierdo: " << tree -> tag(leftmostSon) << endl << endl;
 					else
 						cout << "Hijo mas izquierdo: nullptr" << endl << endl;
@@ -192,8 +192,8 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
-					Node< T > *actual = genericTreeMethods -> searchTag(root, tag);
+				Node< T > *actual = genericTreeMethods -> searchTag(root, tag);
+				if(actual) {
 					Node< T > *rightBrother = tree -> rightBrother(actual);
 					if(rightBrother)
 						cout << "Hermano derecho: " << tree -> tag(rightBrother) << endl << endl;
@@ -209,10 +209,9 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Etiqueta: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
-					Node< T > *actual = genericTreeMethods -> searchTag(root,tag);
+				Node< T > *actual = genericTreeMethods -> searchTag(root, tag);
+				if(actual) 
 					cout << "Resultado: " << tree -> tag(actual) << endl << endl;
-				}
 				else 
 					cout << "Error: el nodo no existe" << endl << endl;
 				system("pause");
@@ -227,10 +226,9 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
-					Node< T > *actual = genericTreeMethods -> searchTag(root, tag);
+				Node< T > *actual = genericTreeMethods -> searchTag(root, tag);
+				if(actual) 
 					cout << "Numero de hijos: " << tree -> numSons(actual) << endl << endl;
-				} 
 				else 
 					cout << "Error: el nodo no existe" << endl << endl;
 				system("pause");
@@ -240,8 +238,8 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
-					Node< T > *actual = genericTreeMethods -> searchTag(root, tag);
+				Node< T > *actual = genericTreeMethods -> searchTag(root, tag);
+				if(actual) {
 					Node< T > *leftBrother = genericTreeMethods -> getLeftBrother(root, actual); 
 					if(leftBrother)
 						cout << "Hermano izquierdo: " << tree -> tag(leftBrother) << endl << endl;
@@ -257,11 +255,9 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				if(tree -> exist(root, tag)) {
-					Node< T > *result = genericTreeMethods -> searchTag(root, tag); 
-					if(result)
-						cout << "Etiqueta: " << tree -> tag(result) << endl << endl;
-				}
+				Node< T > *result = genericTreeMethods -> searchTag(root, tag); 
+				if(result) 
+					cout << "Etiqueta: " << tree -> tag(result) << endl << endl;
 				else 
 					cout << "Error: el nodo no existe" << endl << endl;
 				system("pause");
