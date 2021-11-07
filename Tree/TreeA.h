@@ -68,7 +68,7 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-    Node<T>* root = new Node<T>(tag, 0, -1);
+    Node< T > *root = new Node< T >(tag, 0, -1);
     tree.push_back(root);
     nodesNumber++;
 }
@@ -81,8 +81,8 @@ void Tree< T > :: setRoot(T tag) {
 template < typename T >
 void Tree< T > :: addSon(Node<T> *father, T sonTag) {
     if(nodesNumber < size) {
-        Node<T> *temp = new Node<T>(sonTag, nodesNumber, father -> getPosition());
-        tree[nodesNumber] = temp;
+        Node< T > *temp = new Node< T >(sonTag, nodesNumber, father -> getPosition());
+        tree.push_back(temp);
         nodesNumber++;
     }
 }

@@ -10,13 +10,13 @@ class GenericTreeMethods {
         GenericTreeMethods(Tree< T > *t) { tree = t; };
         Node< T > *getLeftBrother(Node< T > *actual, Node< T > *node);
         Node< T > *searchTag(Node< T >* node, T tag);
-        bool repeatedTags();
+        bool repeatedTags(T tag);
         int nodeHeight(T tag);
         int nodeDepth(T tag);
         int preOrderTreeLevels();
         int byLevelsTreeLevels();
         void printALevel(int level);
-        void printInPreOrder();
+        void printInPreOrder(Node< T > *node);
         void printInPreOrderUsingStack();
         void printAllLevels();
 };
@@ -70,7 +70,7 @@ Node< T >* GenericTreeMethods< T > :: searchTag(Node< T >* node, T tag) {
     MODIFICA:
 */
 template < typename T >
-bool GenericTreeMethods< T > :: repeatedTags() {
+bool GenericTreeMethods< T > :: repeatedTags(T tag) {
 
 }
 
@@ -121,7 +121,7 @@ int GenericTreeMethods< T > :: byLevelsTreeLevels() {
 */
 template < typename T >
 void GenericTreeMethods< T > :: printALevel(int level) {
-
+    
 }
 
 /*
@@ -130,8 +130,13 @@ void GenericTreeMethods< T > :: printALevel(int level) {
     MODIFICA:
 */
 template < typename T >
-void GenericTreeMethods< T > :: printInPreOrder() {
-
+void GenericTreeMethods< T > :: printInPreOrder(Node< T > *node) {
+    cout << node -> getObject() << ", ";
+    Node< T > *actual = tree -> leftmostSon(node);
+    while(actual) {
+        this -> printInPreOrder(actual);
+        actual = tree -> rightBrother(actual);
+    }
 }
 
 /*

@@ -1,12 +1,10 @@
 #ifndef MENUS_H
 #define MENUS_H
-//#include "../Tree/TreeA.h"
-#include "../Tree/TreeB.h"
+#include "../Tree/TreeA.h"
+//#include "../Tree/TreeB.h"
 //#include "../Tree/TreeC.h"
 //#include "../Tree/TreeD.h"
 //#include "../Tree/TreeE.h"
-#include "../Stack/Stack.h"
-#include "../Queue/Queue.h"
 #include "../Tree/GenericTreeMethods.h"
 using namespace std;
 
@@ -248,6 +246,18 @@ void Menus< T > :: treeMenu() {
 				}
 				else 
 					cout << "Error: el nodo no existe" << endl << endl;
+				system("pause");
+			}	break;
+			case 23: {
+				system("cls");
+				if(!tree -> empty())  {
+					cout << "Arbol: ";
+					Node< T > *root = tree -> getRoot();
+					genericTreeMethods -> printInPreOrder(root);
+					cout << endl << endl;
+				} 
+				else
+					cout << "Error: el arbol esta vacio" << endl << endl;
 				system("pause");
 			}	break;
 			case 26: {
