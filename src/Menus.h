@@ -276,6 +276,17 @@ void Menus< T > :: treeMenu() {
 					cout << "Error: el nodo no existe" << endl << endl;
 				system("pause");
 			}	break;
+			case 22: {
+				system("cls");
+				int level;
+				cout << "Nivel: "; cin >> level;
+				if(!tree -> empty()) {
+					cout << "Nodos del nivel #" << level << ": ";
+					genericTreeMethods -> printALevel(level);
+					cout << endl << endl;
+				}
+				system("pause");
+			}	break;
 			case 23: {
 				system("cls");
 				if(!tree -> empty())  {

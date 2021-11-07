@@ -26,7 +26,7 @@ class GenericTreeMethods {
 
 /*
     EFECTO: devuelve el nodo hermano izquierdo
-    REQUIERE: arbol creado
+    REQUIERE: arbol creado y nodo valido
     MODIFICA: no hace modificaciones
 */
 template < typename T >
@@ -50,7 +50,7 @@ Node< T >* GenericTreeMethods< T > :: getLeftBrother(Node< T > *node) {
 
 /*
     EFECTO: devuelve el nodo hermano izquierdo
-    REQUIERE: arbol creado
+    REQUIERE: arbol creado y nodo valido
     MODIFICA: no hace modificaciones
 */
 template < typename T >
@@ -90,6 +90,7 @@ bool GenericTreeMethods< T > :: repeatedTags() {
         else
             queue -> pop();
     }
+    queue -> destroy();
     return result;
 }
 
@@ -104,9 +105,9 @@ int GenericTreeMethods< T > :: nodeHeight(Node< T > *node) {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: averigua la profundiad de un nodo determinado
+    REQUIERE: arbol creado y nodo valido
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 int GenericTreeMethods< T > :: nodeDepth(Node< T > *node) {
@@ -143,13 +144,21 @@ int GenericTreeMethods< T > :: byLevelsTreeLevels() {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: imprime los nodos de un determinado nivel
+    REQUIERE: arbol creado y nodo valido
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 void GenericTreeMethods< T > :: printALevel(int level) {
-    
+    Node< T > *root = tree -> getRoot();
+    Queue< T > *queue = new Queue< T >(tree -> numNodes());
+    queue -> create();
+    this -> fillQueue(root, queue);
+    while(!queue -> empty()) {
+        Node< T > *temp = this -> searchTag(root, queue -> pop());
+        if(this -> nodeDepth(temp)  == level - 1)
+            cout << temp -> getObject() << ", ";
+    } 
 }
 
 /*
