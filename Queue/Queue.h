@@ -6,9 +6,10 @@ template < class T >
 class Queue {
     int first;
     int last;
-    int size = 10;
+    int size;
     T *array;
     public:
+        Queue(int s) { size = s; };
         void create();
         void destroy(); 
         void clear(); 
@@ -19,6 +20,7 @@ class Queue {
         int quantity();
         T pop();
         T top();
+        int objectQuantity(T object);
 };
 
 /*
@@ -128,7 +130,6 @@ T Queue< T > :: pop() {
         T temp = array[first];
         if(this -> quantity() == 1) 
             this -> create();
-        array[first] = 0;
         if(first == size - 1)
             first = 0;
         else
@@ -163,6 +164,21 @@ void Queue< T > :: print() {
             cout << "array[" << i << "]: " << array[i] << endl;
         }
     }
+}
+
+/*
+    EFECTO: retorna la cantidad de veces que un objeto esta en la cola
+    REQUIERE: cola creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+int Queue< T > :: objectQuantity(T object) {
+    int result = 0;
+    for(int i = 0; i < size; ++i) {
+        if(object == array[i])
+            ++result;
+    }
+    return result;
 }
 
 #endif //QUEUE_H

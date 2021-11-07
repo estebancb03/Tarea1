@@ -1,6 +1,8 @@
 #ifndef GENERICTREEMETHODS_H
 #define GENERICTREEMETHODS_H
 #include "../src/Menus.h"
+#include "../Queue/Queue.h"
+#include "../Stack/Stack.h"
 using namespace std;
 
 template < class T >
@@ -8,17 +10,18 @@ class GenericTreeMethods {
     Tree< T > *tree;
     public:
         GenericTreeMethods(Tree< T > *t) { tree = t; };
-        Node< T > *getLeftBrother(Node< T > *actual, Node< T > *node);
-        Node< T > *searchTag(Node< T >* node, T tag);
-        bool repeatedTags(T tag);
+        Node< T > *getLeftBrother(Node< T > *node); 
+        Node< T > *searchTag(Node< T >* node, T tag); 
+        bool repeatedTags(); 
         int nodeHeight(T tag);
         int nodeDepth(T tag);
         int preOrderTreeLevels();
         int byLevelsTreeLevels();
         void printALevel(int level);
-        void printInPreOrder(Node< T > *node);
+        void printInPreOrder(Node< T > *node); 
         void printInPreOrderUsingStack();
         void printAllLevels();
+        void fillQueue(Node< T > *node, Queue< T > *queue);
 };
 
 /*
@@ -27,17 +30,21 @@ class GenericTreeMethods {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node< T >* GenericTreeMethods< T > :: getLeftBrother(Node< T > *node, Node< T > *actual) {
+Node< T >* GenericTreeMethods< T > :: getLeftBrother(Node< T > *node) {
     Node< T > *temp = nullptr;
-    if (tree -> rightBrother(actual) == node)
-        temp = actual; 
-    else {
-        actual = tree -> leftmostSon(actual);
-        while (actual && !temp) {
-            temp = getLeftBrother(node, actual);
-            actual = tree -> rightBrother(actual);
+    Node< T > *father = tree -> father(node);
+    if(tree -> leftmostSon(father) != node) {
+        Node< T > *aux = tree -> leftmostSon(father);
+        bool enabled = true;
+        while(enabled && aux) {
+            if(tree -> rightBrother(aux) == node) {
+                temp = aux;
+                enabled = false;
+            }
+            else
+                aux = tree -> rightBrother(aux);
         }
-    }
+    } 
     return temp;
 }
 
@@ -65,13 +72,25 @@ Node< T >* GenericTreeMethods< T > :: searchTag(Node< T >* node, T tag) {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve un true si hay etiquetas repetidas y un false si no
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
-bool GenericTreeMethods< T > :: repeatedTags(T tag) {
-
+bool GenericTreeMethods< T > :: repeatedTags() {
+    int counter = 0;
+    bool result = false;
+    Queue< T > *queue = new Queue< T >(tree -> numNodes());
+    queue -> create();
+    this -> fillQueue(tree -> getRoot(), queue);
+    while(!queue -> empty() && !result) {
+        T object = queue -> top();
+        if(queue -> objectQuantity(object) > 1) 
+            result = true;
+        else
+            queue -> pop();
+    }
+    return result;
 }
 
 /*
@@ -125,9 +144,9 @@ void GenericTreeMethods< T > :: printALevel(int level) {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: imprime los elementos del arbol en preorden
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 void GenericTreeMethods< T > :: printInPreOrder(Node< T > *node) {
@@ -156,7 +175,25 @@ void GenericTreeMethods< T > :: printInPreOrderUsingStack() {
 */
 template < typename T >
 void GenericTreeMethods< T > :: printAllLevels() {
+    Node< T > *temp = tree -> getRoot();
+    Node< T > *temp2 = nullptr;
+    Queue< Node< T >* > *queue = new Queue< Node< T >* >(tree -> numNodes());
+    queue -> create();
+}
 
+/*
+    EFECTO: llena una cola con los elementos del arbol en pre-orden
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+void GenericTreeMethods< T > :: fillQueue(Node< T > *node, Queue< T > *queue) {
+    queue -> add(node -> getObject());
+    Node< T > *actual = tree -> leftmostSon(node);
+    while(actual) {
+        this -> fillQueue(actual, queue);
+        actual = tree -> rightBrother(actual);
+    }
 }
 
 #endif //GENERICTREEMETHODS_H

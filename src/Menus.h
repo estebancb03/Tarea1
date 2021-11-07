@@ -1,10 +1,10 @@
 #ifndef MENUS_H
 #define MENUS_H
-#include "../Tree/TreeA.h"
+//#include "../Tree/TreeA.h"
 //#include "../Tree/TreeB.h"
 //#include "../Tree/TreeC.h"
 //#include "../Tree/TreeD.h"
-//#include "../Tree/TreeE.h"
+#include "../Tree/TreeE.h"
 #include "../Tree/GenericTreeMethods.h"
 using namespace std;
 
@@ -236,9 +236,9 @@ void Menus< T > :: treeMenu() {
 				T tag;
 				cout << "Nodo: "; cin >> tag;
 				Node< T > *root = tree -> getRoot();
-				Node< T > *actual = genericTreeMethods -> searchTag(root, tag);
-				if(actual) {
-					Node< T > *leftBrother = genericTreeMethods -> getLeftBrother(root, actual); 
+				Node< T > *node = genericTreeMethods -> searchTag(root, tag);
+				if(node) {
+					Node< T > *leftBrother = genericTreeMethods -> getLeftBrother(node); 
 					if(leftBrother)
 						cout << "Hermano izquierdo: " << tree -> tag(leftBrother) << endl << endl;
 					else
@@ -248,12 +248,38 @@ void Menus< T > :: treeMenu() {
 					cout << "Error: el nodo no existe" << endl << endl;
 				system("pause");
 			}	break;
+			case 17: {
+				system("cls");
+				cout << "Hay etiquetas repetidas?: ";
+				if(!tree -> empty()) {
+					bool result = genericTreeMethods -> repeatedTags();
+					if(result)
+						cout << "Si" << endl << endl;
+					else
+						cout << "No" << endl << endl;
+				}
+				else 
+					cout << "No" << endl << endl;
+				system("pause");
+			}	break;
 			case 23: {
 				system("cls");
 				if(!tree -> empty())  {
 					cout << "Arbol: ";
 					Node< T > *root = tree -> getRoot();
 					genericTreeMethods -> printInPreOrder(root);
+					cout << endl << endl;
+				} 
+				else
+					cout << "Error: el arbol esta vacio" << endl << endl;
+				system("pause");
+			}	break;
+			case 25: {
+				system("cls");
+				if(!tree -> empty())  {
+					cout << "Arbol: ";
+					Node< T > *root = tree -> getRoot();
+					genericTreeMethods -> printAllLevels();
 					cout << endl << endl;
 				} 
 				else
