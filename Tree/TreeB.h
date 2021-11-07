@@ -6,7 +6,7 @@ using namespace std;
 
 template < class T >
 class Tree {
-    Node< T >* root;
+    Node< T > *root;
 	int nodesNumber;
     public:
         void create();
@@ -37,11 +37,41 @@ void Tree< T > :: create() {
 	nodesNumber = 0;
 }
 
+/*
+    EFECTO: destruye el árbol
+    REQUIERE: árbol creado
+    MODIFICA: árbol
+*/
 template < typename T >
 void Tree< T > :: destroy() {
-	delete root;
+	if (!this -> empty()){
+		Node< Node< T >* > *sonsAux = root -> getSon();
+		Node< Node< T >* > *deletSon = sonsAux;
+		Node< T > *fathersAux = root;
+		Node< T > *deleteFather = root;
+		while (fathersAux) {
+			if (!sonsAux) {
+                fathersAux = fathersAux -> getNext();
+				delete deleteFather;
+				deleteFather = fathersAux;
+				if (fathersAux)
+					sonsAux = fathersAux -> getSon();
+			}
+			else {
+				sonsAux = sonsAux -> getNext();
+				delete deletSon;
+				deletSon = sonsAux;
+			}
+		}
+	}
+	delete this;
 }
 
+/*
+    EFECTO: elimina todos los nodos del árbol
+    REQUIERE: árbol creado
+    MODIFICA: árbol
+*/
 template < typename T >
 void Tree< T > :: clear() {
 	this -> destroy();
@@ -67,20 +97,19 @@ void Tree< T > :: setRoot(T tag) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: addSon(Node< T > *father, T tag) {
+void Tree< T > :: addSon(Node< T > *node, T tag) {
     Node< T > *temp = new Node< T >(tag);
     temp -> setNext(root -> getNext());
     root -> setNext(temp);
     Node< Node< T >* > *aux = new Node< Node< T >* >(root -> getNext());
-    father -> setSon(aux);
-    if(father -> getSon()) 
-        aux -> setNext(father -> getSon());
-
+	if (node -> getSon())
+        aux -> setNext(node -> getSon()); 
+    node -> setSon(aux);
 	nodesNumber++;
 }
 
 template <typename T>
-void Tree< T > :: deleteLeaf(Node<T>* node) {	
+void Tree< T > :: deleteLeaf(Node<T>* nodo) {	
 	
 }
 
@@ -112,19 +141,23 @@ Node<T>* Tree< T > :: getRoot() {
 template < typename T >
 Node<T>* Tree< T > :: father(Node< T > *node) {	
     Node< T > *temp = nullptr;
-    if(node != root) {
-        temp = root;
-        Node< Node< T >* > *aux = temp -> getSon();
-        while(aux -> getObject() != node) {
-            if(!aux) {
-                temp = temp -> getNext();
-                aux = temp -> getSon();
-            }
-            else
-                aux = aux -> getNext();
-        }
+    bool enabled = false;
+	if(node != root) {
+		temp = root;
+		Node< Node< T >* > *aux = temp -> getSon();
+		while (!enabled) {
+			if (aux) {
+				if (aux -> getObject() == node) 
+					enabled = true;
+				aux = aux -> getNext();
+			} 
+            else {
+				temp = temp -> getNext();
+				aux = temp -> getSon();
+			}
+		}
     }
-    return temp;
+	return temp;
 } 
 
 /*
@@ -140,9 +173,28 @@ Node< T >* Tree< T > :: leftmostSon(Node< T > *node) {
     return temp;
 }
 
+/*
+    EFECTO: devuelve el hermano derecho si tiene, y si no existe devuelve nulo.
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
+*/
 template < typename T >
 Node< T >* Tree< T > :: rightBrother(Node< T > *node) {
-    return node -> getNext();
+    Node< T > *fathersAux = root;
+    Node< Node< T >* > *sonsAux = root -> getSon(); 
+	bool enabled = false;
+	while (!enabled) {
+		if (!sonsAux) {
+            fathersAux = fathersAux -> getNext();
+			sonsAux = fathersAux -> getSon();
+		} 
+        else {
+			if (sonsAux -> getObject() == node) 
+				enabled = true;
+			sonsAux = sonsAux -> getNext();
+		}
+	}
+	return !sonsAux ? nullptr : sonsAux -> getObject();
 }
 
 /*
@@ -155,12 +207,17 @@ int Tree< T > :: numNodes() {
 	return nodesNumber;
 }
 
+/*
+    EFECTO: devuelve el número de hijos de un nodo
+    REQUIERE: árbol creado y nodo válido
+    MODIFICA: no hace modificaciones
+*/
 template < typename T >
 int Tree< T > :: numSons(Node<T> *node) {
     int result = 0;
-    if(node -> getSon() != nullptr) {
+    if(node -> getSon()) {
         Node< Node< T >* > *temp = node -> getSon();
-        while(temp != nullptr) {
+        while(temp) {
             ++result;
             temp = temp -> getNext();
         }
