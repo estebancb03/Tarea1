@@ -262,6 +262,20 @@ void Menus< T > :: treeMenu() {
 					cout << "No" << endl << endl;
 				system("pause");
 			}	break;
+			case 19: {
+				system("cls");
+				T tag;
+				cout << "Nodo: "; cin >> tag;
+				Node< T > *root = tree -> getRoot();
+				Node< T > *node = genericTreeMethods -> searchTag(root, tag);
+				if(node) {
+					int nodeDepth = genericTreeMethods -> nodeDepth(node);
+					cout << "Profundidad: " << nodeDepth << endl << endl;
+				}
+				else 
+					cout << "Error: el nodo no existe" << endl << endl;
+				system("pause");
+			}	break;
 			case 23: {
 				system("cls");
 				if(!tree -> empty())  {

@@ -11,10 +11,10 @@ class GenericTreeMethods {
     public:
         GenericTreeMethods(Tree< T > *t) { tree = t; };
         Node< T > *getLeftBrother(Node< T > *node); 
-        Node< T > *searchTag(Node< T >* node, T tag); 
+        Node< T > *searchTag(Node< T > *node, T tag); 
         bool repeatedTags(); 
-        int nodeHeight(T tag);
-        int nodeDepth(T tag);
+        int nodeHeight(Node< T > *node);
+        int nodeDepth(Node< T > *node);
         int preOrderTreeLevels();
         int byLevelsTreeLevels();
         void printALevel(int level);
@@ -99,7 +99,7 @@ bool GenericTreeMethods< T > :: repeatedTags() {
     MODIFICA:
 */
 template < typename T >
-int GenericTreeMethods< T > :: nodeHeight(T tag) {
+int GenericTreeMethods< T > :: nodeHeight(Node< T > *node) {
 
 }
 
@@ -109,8 +109,17 @@ int GenericTreeMethods< T > :: nodeHeight(T tag) {
     MODIFICA:
 */
 template < typename T >
-int GenericTreeMethods< T > :: nodeDepth(T tag) {
-
+int GenericTreeMethods< T > :: nodeDepth(Node< T > *node) {
+    int depth = 0;
+    if(node != tree -> getRoot()) {
+        ++depth;
+        Node< T > *temp = tree -> father(node);
+        while(temp != tree -> getRoot()) {
+            temp = tree -> father(temp);
+            ++depth;
+        }
+    }
+    return depth;
 }
 
 /*
