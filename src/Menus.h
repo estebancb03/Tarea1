@@ -262,18 +262,45 @@ void Menus< T > :: treeMenu() {
 					cout << "No" << endl << endl;
 				system("pause");
 			}	break;
+			case 18: {
+				system("cls");
+				if(!tree -> empty()) {
+					T tag;
+					cout << "Nodo: "; cin >> tag;
+					Node< T > *root = tree -> getRoot();
+					Node< T > *node = genericTreeMethods -> searchTag(root, tag);
+					if(node) {
+						int height = genericTreeMethods -> nodeHeight(node, 0);
+						cout << "Altura: " << height << endl << endl;
+					}
+					else 
+						cout << "Error: el nodo no existe" << endl << endl;
+				}
+				system("pause");
+			}	break;
 			case 19: {
 				system("cls");
-				T tag;
-				cout << "Nodo: "; cin >> tag;
-				Node< T > *root = tree -> getRoot();
-				Node< T > *node = genericTreeMethods -> searchTag(root, tag);
-				if(node) {
-					int nodeDepth = genericTreeMethods -> nodeDepth(node);
-					cout << "Profundidad: " << nodeDepth << endl << endl;
+				if(!tree -> empty()) {
+					T tag;
+					cout << "Nodo: "; cin >> tag;
+					Node< T > *root = tree -> getRoot();
+					Node< T > *node = genericTreeMethods -> searchTag(root, tag);
+					if(node) {
+						int nodeDepth = genericTreeMethods -> nodeDepth(node);
+						cout << "Profundidad: " << nodeDepth << endl << endl;
+					}
+					else 
+						cout << "Error: el nodo no existe" << endl << endl;
 				}
-				else 
-					cout << "Error: el nodo no existe" << endl << endl;
+				system("pause");
+			}	break;
+			case 20: {
+				system("cls");
+				if(!tree -> empty()) {
+					Node< T > *root = tree -> getRoot();
+					int levels = genericTreeMethods -> preOrderTreeLevels(root, 1);
+					cout << "Cantidad de niveles:  " << levels << endl << endl;
+				}
 				system("pause");
 			}	break;
 			case 22: {
@@ -303,7 +330,6 @@ void Menus< T > :: treeMenu() {
 				system("cls");
 				if(!tree -> empty())  {
 					cout << "Arbol: ";
-					Node< T > *root = tree -> getRoot();
 					genericTreeMethods -> printAllLevels();
 					cout << endl << endl;
 				} 
