@@ -21,7 +21,8 @@ class GenericTreeMethods {
         void printInPreOrder(Node< T > *node); 
         void printInPreOrderUsingStack();
         void printAllLevels();
-        void fillQueue(Node< T > *node, Queue< T > *queue);
+        void fillQueue(Node< T > *node, Queue< Node< T >* > *queue);
+        int objectQuantityInQueue(Queue< Node< T >* > *queue, T object);
 };
 
 /*
@@ -80,12 +81,12 @@ template < typename T >
 bool GenericTreeMethods< T > :: repeatedTags() {
     int counter = 0;
     bool result = false;
-    Queue< T > *queue = new Queue< T >(tree -> numNodes());
+    Queue< Node< T >* > *queue = new Queue< Node< T >* >(tree -> numNodes());
     queue -> create();
     this -> fillQueue(tree -> getRoot(), queue);
     while(!queue -> empty() && !result) {
-        T object = queue -> top();
-        if(queue -> objectQuantity(object) > 1) 
+        Node< T > *node = queue -> top();
+        if(this -> objectQuantityInQueue(queue, node -> getObject()) > 1) 
             result = true;
         else
             queue -> pop();
@@ -151,12 +152,12 @@ int GenericTreeMethods< T > :: byLevelsTreeLevels() {
 template < typename T >
 void GenericTreeMethods< T > :: printALevel(int level) {
     Node< T > *root = tree -> getRoot();
-    Queue< T > *queue = new Queue< T >(tree -> numNodes());
+    Queue< Node< T >* > *queue = new Queue< Node< T >* >(tree -> numNodes());
     queue -> create();
     this -> fillQueue(root, queue);
     while(!queue -> empty()) {
-        Node< T > *temp = this -> searchTag(root, queue -> pop());
-        if(this -> nodeDepth(temp)  == level - 1)
+        Node< T > *temp = queue -> pop();
+        if(this -> nodeDepth(temp) == level - 1)
             cout << temp -> getObject() << ", ";
     } 
 }
@@ -205,13 +206,30 @@ void GenericTreeMethods< T > :: printAllLevels() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-void GenericTreeMethods< T > :: fillQueue(Node< T > *node, Queue< T > *queue) {
-    queue -> add(node -> getObject());
+void GenericTreeMethods< T > :: fillQueue(Node< T > *node, Queue< Node< T >* > *queue) {
+    queue -> add(node);
     Node< T > *actual = tree -> leftmostSon(node);
     while(actual) {
         this -> fillQueue(actual, queue);
         actual = tree -> rightBrother(actual);
     }
+} 
+
+/*
+    EFECTO: retorna la cantidad de veces que un objeto esta en la cola
+    REQUIERE: cola creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+int GenericTreeMethods< T > :: objectQuantityInQueue(Queue< Node< T >* > *queue, T object) {
+    int result = 0;
+    Node< T >* *array = queue -> getArray();
+    for(int i = 0; i < queue -> getSize(); ++i) {
+        Node< T > *node = array[i];
+        if(object == node -> getObject())
+            ++result;
+    }
+    return result;
 }
 
 #endif //GENERICTREEMETHODS_H

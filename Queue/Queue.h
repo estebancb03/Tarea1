@@ -18,9 +18,10 @@ class Queue {
         bool empty();
         bool full();
         int quantity();
+        int getSize();
         T pop();
         T top();
-        int objectQuantity(T object);
+        T *getArray();
 };
 
 /*
@@ -167,18 +168,23 @@ void Queue< T > :: print() {
 }
 
 /*
-    EFECTO: retorna la cantidad de veces que un objeto esta en la cola
+    EFECTO: devuelve el arreglo de datos
     REQUIERE: cola creada
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-int Queue< T > :: objectQuantity(T object) {
-    int result = 0;
-    for(int i = 0; i < size; ++i) {
-        if(object == array[i])
-            ++result;
-    }
-    return result;
+T* Queue< T > :: getArray() {
+    return array;
+}
+
+/*
+    EFECTO: devuelve el tamaño de la cola
+    REQUIERE: cola creada
+    MODIFICA: no hace modificaciones
+*/
+template < typename T >
+int Queue< T > :: getSize() {
+    return size;
 }
 
 #endif //QUEUE_H

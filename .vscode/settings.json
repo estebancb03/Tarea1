@@ -17,6 +17,15 @@
         "fstream": "cpp",
         "istream": "cpp",
         "typeinfo": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "*.tcc": "cpp",
+        "random": "cpp",
+        "streambuf": "cpp",
+        "atomic": "cpp",
+        "memory_resource": "cpp",
+        "memory": "cpp",
+        "stdexcept": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
     }
 }
