@@ -1,10 +1,10 @@
 #ifndef MENUS_H
 #define MENUS_H
 //#include "../Tree/TreeA.h"
-//#include "../Tree/TreeB.h"
+#include "../Tree/TreeB.h"
 //#include "../Tree/TreeC.h"
 //#include "../Tree/TreeD.h"
-#include "../Tree/TreeE.h"
+//#include "../Tree/TreeE.h"
 #include "../Tree/GenericTreeMethods.h"
 using namespace std;
 
@@ -270,7 +270,7 @@ void Menus< T > :: treeMenu() {
 					Node< T > *root = tree -> getRoot();
 					Node< T > *node = genericTreeMethods -> searchTag(root, tag);
 					if(node) {
-						int height = genericTreeMethods -> nodeHeight(node, 0);
+						int height = genericTreeMethods -> nodeHeight(node);
 						cout << "Altura: " << height << endl << endl;
 					}
 					else 

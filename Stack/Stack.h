@@ -14,6 +14,7 @@ class Stack {
         void push(T element);
         void clear();
         bool empty();
+        bool exist(T elements);
         T pop();
         T top();
 };
@@ -100,6 +101,29 @@ template < typename T >
 T Stack< T > :: top() {
     if(!this -> empty())
         return head -> getObject();
+}
+
+/*
+    EFECTO: devuelve un true si el elemento se encuentra en la pila
+    REQUIERE: pila creada
+    MODIFICA: no hace modificaciones
+*/
+template< typename T >
+bool Stack< T > :: exist(T element) {
+    bool result = false;
+    bool enabled = true;
+    if(!this -> empty()) {
+        GenericNode< T > *temp = head;
+        while(temp != nullptr && enabled) {
+            if(temp -> getObject() == element) {
+                result = true;
+                enabled = false;
+            }
+            else
+                temp = temp -> getNext();
+        }   
+    }
+    return result;
 }
 
 /*

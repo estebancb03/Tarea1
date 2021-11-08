@@ -13,17 +13,17 @@ class Tree {
         void destroy();
         void clear();
         bool empty();
-        void setRoot(T);
-        void addSon(Node<T> *father, T);
+        void setRoot(T tag);
+        void addSon(Node<T> *father, T sonTag);
         Node<T>* getRoot();
         Node<T>* father(Node<T> *node);
         Node<T>* leftmostSon(Node<T> *node);
         Node<T>* rightBrother(Node<T> *node);
         int numSons(Node<T> *node);
         int numNodes();
-        void deleteLeaf(Node<T> *);
-        void modifyTag(Node<T>*, T);
-        T tag(Node<T>*);
+        void deleteLeaf(Node<T> *node);
+        void modifyTag(Node<T> *node, T);
+        T tag(Node<T> *node);
 };
 
 /*

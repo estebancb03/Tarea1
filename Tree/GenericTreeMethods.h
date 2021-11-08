@@ -13,7 +13,8 @@ class GenericTreeMethods {
         Node< T > *getLeftBrother(Node< T > *node); 
         Node< T > *searchTag(Node< T > *node, T tag); 
         bool repeatedTags(); 
-        int nodeHeight(Node< T > *node, int height);
+        int nodeHeight(Node< T > *node);
+        int nodeHeight(Node< T > *node, int height, Stack< int > *stack);
         int nodeDepth(Node< T > *node);
         int preOrderTreeLevels(Node< T > *node, int levels);
         int byLevelsTreeLevels();
@@ -100,8 +101,28 @@ bool GenericTreeMethods< T > :: repeatedTags() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-int GenericTreeMethods< T > :: nodeHeight(Node< T > *node, int height) {
+int GenericTreeMethods< T > :: nodeHeight(Node< T > *node) {
+    Stack< int > *stack = new Stack< int >();
+    stack -> create();
+    int height = nodeHeight(node, 0, stack);
+    stack -> destroy();
+    return height;
+}
 
+template < typename T >
+int GenericTreeMethods< T > :: nodeHeight(Node< T > *node, int height, Stack< int > *stack) {
+    int newHeight = 0;
+    Node< T > *temp = tree -> leftmostSon(node);
+    while (temp) {
+        if(!stack -> exist(this -> nodeDepth(node)))
+            ++height;
+        stack -> push(this -> nodeDepth(node));
+        newHeight = nodeHeight(temp, height, stack);
+        if (height < newHeight) 
+            height = newHeight;
+        temp = tree -> rightBrother(temp);
+    }
+    return height;
 }
 
 /*
@@ -130,14 +151,14 @@ int GenericTreeMethods< T > :: nodeDepth(Node< T > *node) {
 */
 template < typename T >
 int GenericTreeMethods< T > :: preOrderTreeLevels(Node< T > *node, int levels) {
-    int nextLevel = 1;
+    bool nextLevel = true;
     node = tree -> leftmostSon(node);
     while(node) {
         if (nextLevel) 
             ++levels;
         levels = preOrderTreeLevels(node, levels);
         node = tree -> rightBrother(node);
-        nextLevel = 0;
+        nextLevel = false;
     }
   return levels;
 }
