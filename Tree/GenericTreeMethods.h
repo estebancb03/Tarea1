@@ -164,14 +164,33 @@ int GenericTreeMethods< T > :: preOrderTreeLevels(Node< T > *node, int levels) {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: devuelve la cantidad de niveles haciendo recorrdio por niveles
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 int GenericTreeMethods< T > :: byLevelsTreeLevels() {
-    
-}
+    int levels = 1;
+    Queue< Node< T >* > *queue = new Queue< Node< T >* >(tree -> numNodes());
+    Queue< Node< T >* > *queue2 = new Queue< Node< T >* >(tree -> numNodes());
+    queue -> add(tree -> getRoot());
+    while(!queue -> empty()) {
+        Node< T > *node = queue -> pop();
+        Node< T > *temp = tree -> leftmostSon(node);
+        while(temp) {
+            queue2 -> add(temp);
+            temp = tree -> rightBrother(temp);
+        }
+        if(queue -> empty() && !queue2 -> empty()) {
+            while(!queue2 -> empty())
+                queue -> add(queue2 -> pop());
+            ++levels;
+        }
+    }
+    queue -> destroy();
+    queue2 -> destroy();
+    return levels;
+} 
 
 /*
     EFECTO: imprime los nodos de un determinado nivel
@@ -207,13 +226,13 @@ void GenericTreeMethods< T > :: printInPreOrder(Node< T > *node) {
 }
 
 /*
-    EFECTO:
-    REQUIERE:
-    MODIFICA:
+    EFECTO: imprime los elementos del arbol en preorden usando una pila auxiliar
+    REQUIERE: arbol creado
+    MODIFICA: no hace modificaciones
 */
 template < typename T >
 void GenericTreeMethods< T > :: printInPreOrderUsingStack() {
-
+    
 } 
 
 /*

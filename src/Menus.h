@@ -1,7 +1,7 @@
 #ifndef MENUS_H
 #define MENUS_H
-//#include "../Tree/TreeA.h"
-#include "../Tree/TreeB.h"
+#include "../Tree/TreeA2.h"
+//#include "../Tree/TreeB.h"
 //#include "../Tree/TreeC.h"
 //#include "../Tree/TreeD.h"
 //#include "../Tree/TreeE.h"
@@ -303,6 +303,14 @@ void Menus< T > :: treeMenu() {
 				}
 				system("pause");
 			}	break;
+			case 21: {
+				system("cls");
+				if(!tree -> empty()) {
+					int levels = genericTreeMethods -> byLevelsTreeLevels();
+					cout << "Cantidad de niveles:  " << levels << endl << endl;
+				}
+				system("pause");
+			}	break;
 			case 22: {
 				system("cls");
 				int level;
@@ -320,6 +328,18 @@ void Menus< T > :: treeMenu() {
 					cout << "Arbol: ";
 					Node< T > *root = tree -> getRoot();
 					genericTreeMethods -> printInPreOrder(root);
+					cout << endl << endl;
+				} 
+				else
+					cout << "Error: el arbol esta vacio" << endl << endl;
+				system("pause");
+			}	break;
+			case 24: {
+				system("cls");
+				if(!tree -> empty())  {
+					cout << "Arbol: ";
+					Node< T > *root = tree -> getRoot();
+					genericTreeMethods -> printInPreOrderUsingStack();
 					cout << endl << endl;
 				} 
 				else

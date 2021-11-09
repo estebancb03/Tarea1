@@ -7,7 +7,7 @@ template < class T >
 class Tree {
     int size = 10;
     int nodesNumber;
-    Node< T >* *tree;
+    Node< T >* tree[10];
     public:
         void create();
         void destroy();
@@ -37,9 +37,7 @@ template < typename T >
 void Tree< T > :: create() {
     size = 10;
     nodesNumber = 0;
-    tree = new Node< T >*[size];
-    for(int i = 0; i < size; ++i)
-        tree[i] = nullptr;
+    //tree = new Node< T >*[size];
 }
 
 /*
@@ -49,7 +47,7 @@ void Tree< T > :: create() {
 */
 template < typename T >
 void Tree< T > :: destroy() {
-    delete[] tree;
+    //delete[] tree;
 }
 
 /*
@@ -134,7 +132,7 @@ template < typename T >
 Node< T >* Tree< T > :: father(Node< T > *node) {
     int position = node -> getFatherPosition();
     Node< T > *temp = tree[position];
-    return nullptr;
+    return temp;
 }
 
 /*
