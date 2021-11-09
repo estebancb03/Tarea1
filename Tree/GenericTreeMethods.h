@@ -238,20 +238,16 @@ void GenericTreeMethods< T > :: printInPreOrder(Node< T > *node) {
 */
 template < typename T >
 void GenericTreeMethods< T > :: printInPreOrderUsingStack() {
-    Stack< Node < T >* > *stack = new Stack< Node < T >* >();
-    stack -> create();
-    Node< T > *temp = tree -> getRoot(); 
-    while(!stack -> empty()) {
-        if(temp) {
-            cout << temp -> getObject() << ", ";
-            if (tree -> rightBrother(temp)) 
-                stack -> push(tree -> rightBrother(temp));
-            temp = tree -> leftmostSon(temp);
-        }
-        else
-            temp = stack -> pop();
+    Stack< Node< T >* > *stack = new Stack< Node< T >* >();
+    Node< T > *node = tree -> getRoot();
+    while (node) {
+        if(!node)
+            node = stack -> pop();
+        cout << node -> getObject() << ", ";
+        if (tree -> rightBrother(node)) 
+            stack -> push(tree -> rightBrother(node));
+        node = tree -> leftmostSon(node);
     }
-    stack -> destroy();
 } 
 
 /*
