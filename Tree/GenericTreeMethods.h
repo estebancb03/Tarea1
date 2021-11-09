@@ -170,23 +170,29 @@ int GenericTreeMethods< T > :: preOrderTreeLevels(Node< T > *node, int levels) {
 */
 template < typename T >
 int GenericTreeMethods< T > :: byLevelsTreeLevels() {
-    int levels = 1;
+    int levels = 0;
+    Node< T > *temp = nullptr, *temp2 = nullptr;
     Queue< Node< T >* > *queue = new Queue< Node< T >* >(tree -> numNodes());
     Queue< Node< T >* > *queue2 = new Queue< Node< T >* >(tree -> numNodes());
+    queue -> create();
+    queue2 -> create();
     queue -> add(tree -> getRoot());
+    queue2 -> add(tree -> getRoot());
     while(!queue -> empty()) {
-        Node< T > *node = queue -> pop();
-        Node< T > *temp = tree -> leftmostSon(node);
-        while(temp) {
-            queue2 -> add(temp);
-            temp = tree -> rightBrother(temp);
-        }
-        if(queue -> empty() && !queue2 -> empty()) {
-            while(!queue2 -> empty())
-                queue -> add(queue2 -> pop());
-            ++levels;
+        temp = queue -> pop();
+        temp2 = tree -> leftmostSon(temp);
+        while(temp2) {
+            queue -> add(temp2);
+            queue2 -> add(temp2);
+            temp2 = tree -> rightBrother(temp2);
         }
     }
+    while(!queue2 -> empty()) {
+        temp = queue2 -> pop();
+        if(levels < nodeDepth(temp))
+            levels = nodeDepth(temp);
+    }
+    ++levels;
     queue -> destroy();
     queue2 -> destroy();
     return levels;
@@ -232,7 +238,20 @@ void GenericTreeMethods< T > :: printInPreOrder(Node< T > *node) {
 */
 template < typename T >
 void GenericTreeMethods< T > :: printInPreOrderUsingStack() {
-    
+    Stack< Node < T >* > *stack = new Stack< Node < T >* >();
+    stack -> create();
+    Node< T > *temp = tree -> getRoot(); 
+    while(!stack -> empty()) {
+        if(temp) {
+            cout << temp -> getObject() << ", ";
+            if (tree -> rightBrother(temp)) 
+                stack -> push(tree -> rightBrother(temp));
+            temp = tree -> leftmostSon(temp);
+        }
+        else
+            temp = stack -> pop();
+    }
+    stack -> destroy();
 } 
 
 /*

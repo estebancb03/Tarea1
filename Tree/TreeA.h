@@ -1,13 +1,14 @@
 #ifndef TREEA_H
 #define TREEA_H
+#include <vector>
 #include "../Nodes/Tree1Node.h"
 using namespace std;
 
 template < class T >
 class Tree {
-    int size = 10;
+    int size;
     int nodesNumber;
-    Node< T >* tree[10];
+    vector< Node< T >* > tree;
     public:
         void create();
         void destroy();
@@ -37,7 +38,7 @@ template < typename T >
 void Tree< T > :: create() {
     size = 10;
     nodesNumber = 0;
-    //tree = new Node< T >*[size];
+    tree.reserve(this -> size);
 }
 
 /*
@@ -47,7 +48,7 @@ void Tree< T > :: create() {
 */
 template < typename T >
 void Tree< T > :: destroy() {
-    //delete[] tree;
+    delete this; 
 }
 
 /*
@@ -69,8 +70,11 @@ void Tree< T > :: clear() {
 */
 template < typename T >
 void Tree< T > :: setRoot(T tag) {
-    Node< T > *root = new Node< T >(tag, 0, -1);
-    tree[0] = root;
+    Node< T > *root = new Node< T >();
+    root -> setObject(tag);
+    root -> setFatherPosition(-1);
+    root -> setPosition(nodesNumber);
+    tree.push_back(root);
     nodesNumber++;
 }
 
@@ -80,9 +84,12 @@ void Tree< T > :: setRoot(T tag) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: addSon(Node< T > *father, T sonTag) {
-    Node< T > *temp = new Node< T >(sonTag, nodesNumber, father -> getPosition());
-    tree[nodesNumber] = temp;
+void Tree< T > :: addSon(Node< T > *node, T tag) {
+    Node< T > *son = new Node<T>();
+    son -> setObject(tag);
+    son -> setFatherPosition(node -> getPosition());
+    son -> setPosition(nodesNumber);
+    tree.push_back(son);
     nodesNumber++;
 }
 
@@ -108,8 +115,8 @@ void Tree< T > :: deleteLeaf(Node< T > *node) {
     MODIFICA: árbol
 */
 template < typename T >
-void Tree< T > :: modifyTag(Node< T > *node, T newTag) {
-    node -> setObject(newTag);
+void Tree< T > :: modifyTag(Node< T > *node, T tag) {
+    tree[node -> getPosition()] -> setObject(tag);
 }
 
 /*
@@ -119,8 +126,7 @@ void Tree< T > :: modifyTag(Node< T > *node, T newTag) {
 */
 template < typename T >
 Node< T >* Tree< T > :: getRoot() {
-    Node< T > *root = tree[0];
-    return root;
+    return tree[0];
 }
 
 /*
@@ -129,10 +135,8 @@ Node< T >* Tree< T > :: getRoot() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node< T >* Tree< T > :: father(Node< T > *node) {
-    int position = node -> getFatherPosition();
-    Node< T > *temp = tree[position];
-    return temp;
+Node<T>* Tree< T > :: father(Node< T > *node) {
+    return tree[node -> getFatherPosition()];
 }
 
 /*
@@ -141,19 +145,13 @@ Node< T >* Tree< T > :: father(Node< T > *node) {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-Node< T >* Tree< T > :: leftmostSon(Node< T > *node) {
-    Node< T > *temp = nullptr;
-    int i = node -> getPosition();
-    while(i < size) {
-        Node< T > *aux = tree[i];
-        if(node -> getPosition() == aux -> getFatherPosition()) {
-            i = size; 
-            temp = aux;
-        }
-        else
-            ++i;
+Node<T>* Tree< T > :: leftmostSon(Node< T > *node) {
+    int father = node -> getPosition();
+    for (int i = 0; i < nodesNumber; ++i) {
+        if (tree[i] -> getFatherPosition() == father) 
+            return this -> tree[i];
     }
-    return temp;
+    return nullptr;
 }
 
 /*
@@ -163,18 +161,12 @@ Node< T >* Tree< T > :: leftmostSon(Node< T > *node) {
 */
 template < typename T >
 Node< T >* Tree< T > :: rightBrother(Node< T > *node) {
-    Node< T > *temp = nullptr;
-    int i = node -> getPosition();
-    while(i <= size - 1) {
-        Node< T > *aux = tree[i + 1];
-        if(node -> getFatherPosition() == aux -> getFatherPosition()) {
-            i = size;
-            temp = aux;
-        }
-        else
-            ++i;
+    int father = node -> getFatherPosition();
+    for (int i = node -> getPosition() + 1; i < tree.size(); ++i) {
+        if (tree[i] -> getFatherPosition() == father) 
+            return this -> tree[i];
     }
-    return temp;
+    return nullptr;
 }
 
 /*
@@ -193,14 +185,14 @@ int Tree< T > :: numNodes() {
     MODIFICA: no hace modificaciones
 */
 template < typename T >
-int Tree< T > :: numSons(Node< T > *node) {
-    int position = node -> getPosition();
-    int result = 0;
-    for(int i = position + 1; i < nodesNumber; ++i) {
-        if(tree[i] -> getFatherPosition() == position)
-            ++result;
+int Tree< T > :: numSons(Node< T >* node) {
+    int father = node -> getPosition();
+    int numSons = 0;
+    for (int i = 0; i < tree.size(); ++i) {
+        if (tree[i] -> getFatherPosition() == father) 
+            ++numSons;
     }
-    return result;
+    return numSons;
 }
 
 /*
@@ -220,44 +212,7 @@ bool Tree< T > :: empty() {
 */
 template < typename T >
 T Tree< T > :: tag(Node< T > *node) {
-   return tree[node -> getPosition()] -> getObject();
-}
-
-/*
-    EFECTO: devuelve un verdadero si el nodo existe, si no devuelve falso
-    REQUIERE: arbol creado
-    MODIFICA: no hace modificaciones
-*/
-template < typename T >
-bool Tree< T > :: exist(T tag) {
-    bool enabled = true;
-    bool result = false;
-    int i = 0;
-    while(enabled) {
-        if(i > nodesNumber) 
-            enabled = false;
-        else {
-            if(tree[i] -> getObject() == tag) {
-                result = true;
-                enabled = false;
-            }
-            ++i;
-        }
-    }
-    return result;
-}
-
-template < typename T >
-void Tree< T > :: print() {
-    for(int i = 0; i < size; ++i) {
-        Node< T > *temp = tree[i];
-        if(temp) {
-            cout << "[" << i << "]: " << temp -> getObject() << endl;
-        }
-        else {
-            cout << "[" << i << "]: nullptr" << endl;
-        }
-    }
+    return this -> tree[node -> getPosition()] -> getObject();
 }
 
 #endif
