@@ -298,7 +298,7 @@ void Menus< T > :: treeMenu() {
 				system("cls");
 				if(!tree -> empty()) {
 					Node< T > *root = tree -> getRoot();
-					int levels = genericTreeMethods -> preOrderTreeLevels(root, 1);
+					int levels = genericTreeMethods -> preOrderTreeLevels(root, 0);
 					cout << "Cantidad de niveles:  " << levels << endl << endl;
 				}
 				system("pause");

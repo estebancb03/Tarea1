@@ -22,6 +22,7 @@ class GenericTreeMethods {
         void printInPreOrder(Node< T > *node); 
         void printInPreOrderUsingStack();
         void printAllLevels();
+        //Metodos auxiliares
         void fillQueue(Node< T > *node, Queue< Node< T >* > *queue);
         int objectQuantityInQueue(Queue< Node< T >* > *queue, T object);
 };
@@ -241,12 +242,12 @@ void GenericTreeMethods< T > :: printInPreOrderUsingStack() {
     Stack< Node< T >* > *stack = new Stack< Node< T >* >();
     Node< T > *node = tree -> getRoot();
     while (node) {
-        if(!node)
-            node = stack -> pop();
         cout << node -> getObject() << ", ";
         if (tree -> rightBrother(node)) 
             stack -> push(tree -> rightBrother(node));
         node = tree -> leftmostSon(node);
+        if(!node)
+            node = stack -> pop();
     }
 } 
 
