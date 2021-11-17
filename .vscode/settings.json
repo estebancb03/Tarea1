@@ -26,6 +26,25 @@
         "memory": "cpp",
         "stdexcept": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "cctype": "cpp",
+        "chrono": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "exception": "cpp",
+        "iterator": "cpp",
+        "numeric": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp",
+        "iomanip": "cpp",
+        "iosfwd": "cpp",
+        "limits": "cpp"
     }
 }

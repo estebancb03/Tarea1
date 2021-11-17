@@ -5,9 +5,12 @@
 */
 #include <iostream>
 #include "Menus.h"
+#include "Tests.h"
 
 int main() {
-	Menus< string > *menu = new Menus< string >();
-	menu -> treeMenu();
+	//Menus< string > *menu = new Menus< string >();
+	//menu -> treeMenu();
+	Tests< int > *test = new Tests< int >();
+	test -> test();
 	return 0;
 }
